@@ -1,4 +1,4 @@
-# 🌾 AgriXAI - Intelligent Crop Yield Advisory System
+# 🌾 AgriXAI - Intelligent Crop Yield Advisory System - https://agrixai-t3ti.onrender.com/
 
 A web-based application that uses Machine Learning and Explainable AI (XAI) to predict crop yields and provide actionable insights for farmers. Built with Flask, featuring SHAP explanations for transparent AI decision-making.
 
