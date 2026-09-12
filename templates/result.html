@@ -1,182 +1,503 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result — AgriXAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>{{ t('result_title') }} — AgriXAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', sans-serif; min-height: 100vh;
-            background: linear-gradient(135deg, #0a1f0a 0%, #1a3a1a 30%, #0d2b0d 70%, #061206 100%);
-            color: #e0f0e0;
+            font-family: 'Inter', 'Noto Sans Kannada', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #07190d 0%, #0d2816 50%, #051209 100%);
+            color: #e2f0e6;
+            line-height: 1.5;
         }
-        .bg-pattern {
-            position: fixed; inset: 0; z-index: 0;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(34,197,94,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(22,163,74,0.06) 0%, transparent 50%);
-        }
+
+        /* Navbar */
         .navbar {
-            position: relative; z-index: 10;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 1rem 2rem; background: rgba(10,20,10,0.8);
-            border-bottom: 1px solid rgba(34,197,94,0.1); backdrop-filter: blur(10px);
+            background: rgba(9, 32, 18, 0.85);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+            padding: 0.9rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-        .nav-brand span:first-child { font-size: 1.5rem; }
-        .nav-brand span:last-child {
-            font-size: 1.2rem; font-weight: 800;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
         }
-        .nav-links { display: flex; align-items: center; gap: 1rem; }
+        .nav-brand-logo { font-size: 1.6rem; }
+        .nav-brand-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .nav-brand-text span { color: #4ade80; }
+        .nav-badge {
+            font-size: 0.65rem;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22c55e;
+            color: #4ade80;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: 0.4rem;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
         .nav-links a {
-            color: #86efac; text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            padding: 0.4rem 0.8rem; border-radius: 8px; transition: all 0.2s;
+            color: #bbf7d0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.2s;
         }
-        .nav-links a:hover { background: rgba(34,197,94,0.1); }
-
-        .main {
-            position: relative; z-index: 1;
-            max-width: 750px; margin: 2rem auto; padding: 0 1.5rem 3rem;
+        .nav-links a:hover {
+            background: rgba(34, 197, 94, 0.15);
+            color: #ffffff;
         }
-
-        /* Hero result */
-        .result-hero {
-            text-align: center; padding: 2.5rem 2rem;
-            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.12);
-            border-radius: 24px; margin-bottom: 1.5rem; backdrop-filter: blur(20px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-        }
-        .result-hero h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; color: #86efac; }
-        .yield-value {
-            font-size: 3.5rem; font-weight: 800;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 0.3rem;
-        }
-        .yield-unit { font-size: 0.9rem; color: rgba(134,239,172,0.5); margin-bottom: 1rem; }
-        .status-badge {
-            display: inline-block; padding: 0.5rem 1.5rem; border-radius: 30px;
-            font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .status-high {
-            background: rgba(34,197,94,0.15); border: 2px solid #22c55e; color: #4ade80;
-        }
-        .status-low {
-            background: rgba(239,68,68,0.1); border: 2px solid rgba(239,68,68,0.4); color: #fca5a5;
-        }
-        .status-error {
-            background: rgba(239,68,68,0.1); border: 2px solid rgba(239,68,68,0.4); color: #fca5a5;
+        .lang-select-form select {
+            background: #092014;
+            color: #86efac;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            border-radius: 8px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
         }
 
-        /* Cards */
-        .cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.5rem; }
+        /* Main Container */
+        .main-container {
+            max-width: 860px;
+            margin: 2.5rem auto;
+            padding: 0 1.2rem 4rem;
+        }
+
+        /* DECISION VERDICT HERO BANNER */
+        .verdict-card {
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid;
+        }
+        .verdict-proceed {
+            background: linear-gradient(145deg, rgba(16, 70, 32, 0.95), rgba(6, 40, 18, 0.98));
+            border-color: #22c55e;
+        }
+        .verdict-change {
+            background: linear-gradient(145deg, rgba(80, 20, 15, 0.95), rgba(45, 10, 10, 0.98));
+            border-color: #f87171;
+        }
+        .verdict-badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.35rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+        }
+        .verdict-proceed .verdict-badge-top {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            border: 1px solid #4ade80;
+        }
+        .verdict-change .verdict-badge-top {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border: 1px solid #f87171;
+        }
+        .verdict-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .verdict-icon {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .verdict-titles h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+            color: #ffffff;
+        }
+        .verdict-titles p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        .verdict-proceed .verdict-titles p { color: #bbf7d0; }
+        .verdict-change .verdict-titles p { color: #fecaca; }
+
+        /* Metrics Grid inside Verdict */
+        .verdict-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .metric-box { text-align: center; }
+        .metric-box .label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+        .metric-box .value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .metric-box .unit {
+            font-size: 0.75rem;
+            color: #86efac;
+        }
+        .metric-box.benchmark .value {
+            font-size: 1.8rem;
+            color: #cbd5e1;
+        }
+
+        /* Actionable Plan Guide */
+        .plan-guide-card {
+            background: rgba(14, 35, 22, 0.85);
+            border: 1px solid rgba(74, 222, 128, 0.25);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .plan-guide-card h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .plan-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 0.9rem;
+        }
+        .plan-item:last-child { border-bottom: none; }
+        .plan-item.critical { color: #fca5a5; }
+        .plan-item.critical::before { content: '⚠️'; font-size: 1.1rem; flex-shrink: 0; }
+        .plan-item.positive { color: #86efac; }
+        .plan-item.positive::before { content: '✅'; font-size: 1.1rem; flex-shrink: 0; }
+        .plan-item.action { color: #fde047; }
+        .plan-item.action::before { content: '⚡'; font-size: 1.1rem; flex-shrink: 0; }
+
+        /* SHAP Analysis Section */
+        .shap-section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .shap-badge-cert {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        .cards-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
         .info-card {
-            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.12);
-            border-radius: 18px; padding: 1.5rem; backdrop-filter: blur(20px);
+            background: rgba(14, 35, 22, 0.85);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            border-radius: 16px;
+            padding: 1.4rem;
         }
-        .info-card h2 {
-            font-size: 0.9rem; font-weight: 700; color: #86efac;
-            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+        .info-card h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+        .positive-card h3 { color: #4ade80; }
+        .negative-card h3 { color: #f87171; }
         .factor-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0.6rem 0; border-bottom: 1px solid rgba(34,197,94,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
         .factor-item:last-child { border-bottom: none; }
-        .factor-name { font-size: 0.85rem; font-weight: 500; }
-        .factor-value {
-            font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem;
-            border-radius: 6px;
+        .factor-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #e2e8f0;
         }
-        .factor-positive { color: #4ade80; background: rgba(34,197,94,0.1); }
-        .factor-negative { color: #fca5a5; background: rgba(239,68,68,0.1); }
+        .factor-value {
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            letter-spacing: 0.3px;
+        }
+        .factor-positive {
+            color: #22c55e;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .factor-negative {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
 
         /* Suggestions */
         .suggestions-card {
-            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.12);
-            border-radius: 18px; padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(20px);
+            background: rgba(14, 35, 22, 0.85);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            border-radius: 16px;
+            padding: 1.4rem;
+            margin-bottom: 2rem;
         }
-        .suggestions-card h2 {
-            font-size: 0.9rem; font-weight: 700; color: #86efac;
-            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+        .suggestions-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .suggestion-item {
-            display: flex; align-items: flex-start; gap: 0.6rem;
-            padding: 0.6rem 0; font-size: 0.85rem; color: rgba(224,240,224,0.8);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.6rem 0;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .suggestion-item:last-child { border-bottom: none; }
         .suggestion-item::before { content: '💡'; flex-shrink: 0; }
 
-        /* Button */
-        .btn-again {
-            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-            width: 100%; max-width: 300px; margin: 0 auto; padding: 0.9rem;
-            border-radius: 14px; font-size: 1rem; font-weight: 700; border: none;
-            cursor: pointer; text-decoration: none;
-            background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff;
-            box-shadow: 0 4px 20px rgba(34,197,94,0.3); transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
+        /* Buttons Row */
+        .action-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
         }
-        .btn-again:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(34,197,94,0.4); }
+        .btn-again {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-again:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
+        }
+        .btn-print {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            cursor: pointer;
+            text-decoration: none;
+            background: rgba(34, 197, 94, 0.1);
+            color: #86efac;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-print:hover { background: rgba(34, 197, 94, 0.2); }
 
-        @media (max-width: 600px) {
+        /* Footer */
+        .site-footer {
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6ee7b7;
+        }
+        .site-footer p { margin-bottom: 0.3rem; }
+
+        @media (max-width: 650px) {
             .cards-row { grid-template-columns: 1fr; }
-            .navbar { padding: 0.8rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+            .navbar { padding: 0.8rem 1rem; flex-wrap: wrap; gap: 0.6rem; }
+            .nav-right { width: 100%; justify-content: space-between; }
+            .verdict-header { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-
+    <!-- Navbar -->
     <nav class="navbar">
         <a href="/predict" class="nav-brand">
-            <span>🌾</span>
-            <span>AgriXAI</span>
+            <span class="nav-brand-logo">🌾</span>
+            <span class="nav-brand-text">Agri<span>XAI</span></span>
+            <span class="nav-badge">Explainable AI</span>
         </a>
-        <div class="nav-links">
-            <a href="/predict" id="nav-predict">{{ t('nav_home') }}</a>
-            <a href="/profile" id="nav-profile">{{ t('nav_profile') }}</a>
-            <a href="/logout" id="nav-logout">{{ t('nav_logout') }}</a>
+        <div class="nav-right">
+            <form action="/set_language" method="POST" class="lang-select-form">
+                <select name="language" onchange="this.form.submit()" aria-label="Select Language">
+                    {% for code, name in languages.items() %}
+                    <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>
+                        {{ name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </form>
+            <div class="nav-links">
+                <a href="/predict" id="nav-predict">{{ t('nav_home') }}</a>
+                <a href="/profile" id="nav-profile">{{ t('nav_profile') }}</a>
+                <a href="/logout" id="nav-logout">{{ t('nav_logout') }}</a>
+            </div>
         </div>
     </nav>
 
-    <div class="main">
-        <div class="result-hero">
-            <h1>📊 {{ t('result_title') }}</h1>
-            <div class="yield-value" id="yield-value">{{ yield_value }}</div>
-            <div class="yield-unit">{{ t('result_predicted_yield') }} (tonnes/hectare)</div>
-            {% if status == "HIGH" %}
-            <span class="status-badge status-high" id="yield-status">✅ {{ t('result_status_high') }}</span>
-            {% elif status == "LOW" %}
-            <span class="status-badge status-low" id="yield-status">⚠️ {{ t('result_status_low') }}</span>
-            {% else %}
-            <span class="status-badge status-error" id="yield-status">❌ {{ status }}</span>
-            {% endif %}
+    <!-- Main Content -->
+    <div class="main-container">
+
+        <!-- 1. FARMER DECISION ADVISORY VERDICT HERO -->
+        <div class="verdict-card {% if verdict == 'PROCEED' %}verdict-proceed{% else %}verdict-change{% endif %}">
+            <div class="verdict-badge-top">
+                <span>{{ verdict_icon }}</span>
+                <span>{{ t('decision_title') }}</span>
+            </div>
+
+            <div class="verdict-header">
+                <div class="verdict-icon">{{ verdict_icon }}</div>
+                <div class="verdict-titles">
+                    <h1 id="verdict-heading">{{ t(verdict_key) }}</h1>
+                    <p id="verdict-description">{{ t(verdict_desc_key) }}</p>
+                </div>
+            </div>
+
+            <div class="verdict-metrics">
+                <div class="metric-box">
+                    <div class="label">{{ t('result_predicted_yield') }}</div>
+                    <div class="value" id="yield-value">{{ yield_value }}</div>
+                    <div class="unit">tonnes / hectare</div>
+                </div>
+
+                <div class="metric-box benchmark">
+                    <div class="label">Benchmark</div>
+                    <div class="value">{{ benchmark_yield }}</div>
+                    <div class="unit">tonnes / hectare (Median)</div>
+                </div>
+
+                <div class="metric-box">
+                    <div class="label">{{ t('decision_confidence') }}</div>
+                    <div class="value">{{ confidence_score }}%</div>
+                    <div class="unit">SHAP Consensus</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. ACTIONABLE GUIDANCE FOR FARMER -->
+        {% if plan_guidance %}
+        <div class="plan-guide-card">
+            <h2>📋 {{ t('plan_action_guide') }}</h2>
+            {% for item_type, text in plan_guidance %}
+            <div class="plan-item {{ item_type }}">{{ text }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- 3. SHAP EXPLAINABLE AI FACTOR BREAKDOWN -->
+        <div class="shap-section-title">
+            <span>📊 {{ t('shap_analysis_heading') }}</span>
+            <span class="shap-badge-cert">TreeExplainer Active</span>
         </div>
 
         {% if positive or negative %}
         <div class="cards-row">
             {% if positive %}
-            <div class="info-card">
-                <h2>📈 {{ t('result_key_positive') }}</h2>
+            <div class="info-card positive-card">
+                <h3>📈 {{ t('result_key_positive') }}</h3>
                 {% for tkey, value, raw in positive %}
                 <div class="factor-item">
                     <span class="factor-name">{{ t(tkey) if tkey else raw }}</span>
-                    <span class="factor-value factor-positive">+{{ value }}</span>
+                    <span class="factor-value factor-positive">+{{ value }} t/ha</span>
                 </div>
                 {% endfor %}
             </div>
             {% endif %}
+
             {% if negative %}
-            <div class="info-card">
-                <h2>📉 {{ t('result_key_negative') }}</h2>
+            <div class="info-card negative-card">
+                <h3>📉 {{ t('result_key_negative') }}</h3>
                 {% for tkey, value, raw in negative %}
                 <div class="factor-item">
                     <span class="factor-name">{{ t(tkey) if tkey else raw }}</span>
-                    <span class="factor-value factor-negative">{{ value }}</span>
+                    <span class="factor-value factor-negative">{{ value }} t/ha</span>
                 </div>
                 {% endfor %}
             </div>
@@ -184,16 +505,27 @@
         </div>
         {% endif %}
 
+        <!-- 4. RECOMMENDATIONS -->
         {% if suggestions %}
         <div class="suggestions-card">
-            <h2>💡 {{ t('result_recommendations') }}</h2>
+            <h3>💡 {{ t('result_recommendations') }}</h3>
             {% for sug in suggestions %}
             <div class="suggestion-item">{{ t(sug) }}</div>
             {% endfor %}
         </div>
         {% endif %}
 
-        <a href="/predict" class="btn-again" id="predict-again-btn">🔄 {{ t('result_predict_again') }}</a>
+        <!-- Actions -->
+        <div class="action-row">
+            <a href="/predict" class="btn-again" id="predict-again-btn">🔄 {{ t('result_predict_again') }}</a>
+            <button onclick="window.print()" class="btn-print">🖨️ Print Advisory Report</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="site-footer">
+            <p><strong>AgriXAI</strong> — Intelligent Crop Yield Advisory & Decision Support System</p>
+            <p>Explainable AI Engine powered by SHAP (SHapley Additive exPlanations) TreeExplainer & CatBoost Machine Learning</p>
+        </div>
     </div>
 </body>
 </html>

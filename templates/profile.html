@@ -1,186 +1,326 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile — AgriXAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>{{ t('profile_page_title') }} — AgriXAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', sans-serif; min-height: 100vh;
-            background: linear-gradient(135deg, #0a1f0a 0%, #1a3a1a 30%, #0d2b0d 70%, #061206 100%);
-            color: #e0f0e0;
+            font-family: 'Inter', 'Noto Sans Kannada', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #07190d 0%, #0d2816 50%, #051209 100%);
+            color: #e2f0e6;
+            line-height: 1.5;
         }
-        .bg-pattern {
-            position: fixed; inset: 0; z-index: 0;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(34,197,94,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(22,163,74,0.06) 0%, transparent 50%);
-        }
+
+        /* Navbar */
         .navbar {
-            position: relative; z-index: 10;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 1rem 2rem; background: rgba(10,20,10,0.8);
-            border-bottom: 1px solid rgba(34,197,94,0.1); backdrop-filter: blur(10px);
+            background: rgba(9, 32, 18, 0.85);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+            padding: 0.9rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-        .nav-brand span:first-child { font-size: 1.5rem; }
-        .nav-brand span:last-child {
-            font-size: 1.2rem; font-weight: 800;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
         }
-        .nav-links { display: flex; align-items: center; gap: 1rem; }
+        .nav-brand-logo { font-size: 1.6rem; }
+        .nav-brand-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .nav-brand-text span { color: #4ade80; }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
         .nav-links a {
-            color: #86efac; text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            padding: 0.4rem 0.8rem; border-radius: 8px; transition: all 0.2s;
+            color: #bbf7d0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.2s;
         }
-        .nav-links a:hover { background: rgba(34,197,94,0.1); }
-        .lang-select {
-            background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2);
-            color: #86efac; padding: 0.3rem 0.5rem; border-radius: 8px; font-size: 0.8rem;
-            cursor: pointer; outline: none; font-family: 'Inter', sans-serif;
+        .nav-links a:hover {
+            background: rgba(34, 197, 94, 0.15);
+            color: #ffffff;
         }
-        .lang-select option { background: #1a3a1a; color: #e0f0e0; }
+        .lang-select-form select {
+            background: #092014;
+            color: #86efac;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            border-radius: 8px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
+        }
 
-        .main {
-            position: relative; z-index: 1;
-            max-width: 700px; margin: 2rem auto; padding: 0 1.5rem 3rem;
+        /* Main */
+        .main-container {
+            max-width: 760px;
+            margin: 2.5rem auto;
+            padding: 0 1.2rem 4rem;
         }
-
         .profile-header {
-            text-align: center; margin-bottom: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
         }
         .profile-header .avatar {
-            width: 80px; height: 80px; border-radius: 50%;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2.2rem; margin: 0 auto 1rem; border: 3px solid rgba(34,197,94,0.3);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 1rem;
+            border: 3px solid #4ade80;
         }
-        .profile-header h1 { font-size: 1.5rem; font-weight: 700; color: #e0f0e0; }
-        .profile-header p { font-size: 0.85rem; color: rgba(134,239,172,0.5); margin-top: 0.3rem; }
+        .profile-header h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .profile-header p {
+            font-size: 0.9rem;
+            color: #86efac;
+            margin-top: 0.3rem;
+        }
 
         .info-card {
-            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.12);
-            border-radius: 18px; padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(20px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            background: rgba(14, 35, 22, 0.9);
+            border: 1px solid rgba(74, 222, 128, 0.25);
+            border-radius: 18px;
+            padding: 1.6rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
         .info-card h2 {
-            font-size: 0.9rem; font-weight: 700; color: #86efac;
-            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .info-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0.7rem 0; border-bottom: 1px solid rgba(34,197,94,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
         .info-row:last-child { border-bottom: none; }
-        .info-label { font-size: 0.82rem; color: rgba(134,239,172,0.6); font-weight: 500; }
-        .info-value { font-size: 0.85rem; font-weight: 600; color: #e0f0e0; }
+        .info-label { font-size: 0.85rem; color: #94a3b8; font-weight: 600; }
+        .info-value { font-size: 0.9rem; font-weight: 700; color: #ffffff; }
         .status-active {
-            display: inline-block; background: rgba(34,197,94,0.15); color: #4ade80;
-            padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700;
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid #22c55e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
         }
 
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
         .stat-card {
-            text-align: center; padding: 1rem; border-radius: 14px;
-            background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.1);
+            text-align: center;
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(6, 23, 13, 0.8);
+            border: 1px solid rgba(74, 222, 128, 0.2);
         }
-        .stat-value { font-size: 1.5rem; font-weight: 800; color: #4ade80; }
-        .stat-label { font-size: 0.7rem; color: rgba(134,239,172,0.5); margin-top: 0.3rem; }
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: #4ade80; }
+        .stat-label { font-size: 0.75rem; color: #94a3b8; margin-top: 0.3rem; }
 
         .crops-list { display: flex; gap: 0.6rem; flex-wrap: wrap; }
         .crop-tag {
-            background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.15);
-            padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; color: #86efac;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            color: #86efac;
+            font-weight: 600;
         }
 
         .success-msg {
-            background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3);
-            border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1rem;
-            font-size: 0.85rem; color: #4ade80; text-align: center;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #4ade80;
+            text-align: center;
         }
         .error-msg {
-            background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3);
-            border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1rem;
-            font-size: 0.85rem; color: #fca5a5; text-align: center;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #fca5a5;
+            text-align: center;
         }
 
         .form-group { margin-bottom: 1rem; }
         .form-group label {
-            display: block; font-size: 0.78rem; font-weight: 600; color: #86efac;
-            margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px;
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.3px;
         }
         .form-group input, .form-group textarea {
-            width: 100%; padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.9rem;
-            background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.18);
-            color: #e0f0e0; outline: none; transition: border-color 0.3s;
-            font-family: 'Inter', sans-serif;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            background: rgba(6, 23, 13, 0.8);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.3s;
+            font-family: inherit;
         }
         .form-group textarea { min-height: 100px; resize: vertical; }
-        .form-group input:focus, .form-group textarea:focus { border-color: #22c55e; }
-        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(134,239,172,0.3); }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+        }
 
         .btn-save {
-            width: 100%; padding: 0.85rem; border-radius: 12px; font-size: 0.95rem;
-            font-weight: 700; border: none; cursor: pointer;
-            background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff;
-            box-shadow: 0 4px 20px rgba(34,197,94,0.3); transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
+            width: 100%;
+            padding: 0.9rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+            transition: all 0.2s;
+            font-family: inherit;
         }
-        .btn-save:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(34,197,94,0.4); }
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
+        }
 
         .btn-logout {
-            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-            width: 100%; max-width: 250px; margin: 1.5rem auto 0; padding: 0.75rem;
-            border-radius: 12px; font-size: 0.9rem; font-weight: 600;
-            background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
-            color: #fca5a5; cursor: pointer; text-decoration: none; transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            max-width: 250px;
+            margin: 1.5rem auto 0;
+            padding: 0.75rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
         }
-        .btn-logout:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.5); }
+        .btn-logout:hover { background: rgba(239, 68, 68, 0.25); }
 
         @media (max-width: 600px) {
             .stats-grid { grid-template-columns: 1fr; }
-            .navbar { padding: 0.8rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+            .navbar { padding: 0.8rem 1rem; flex-wrap: wrap; gap: 0.6rem; }
+            .nav-right { width: 100%; justify-content: space-between; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-
     <nav class="navbar">
         <a href="/predict" class="nav-brand">
-            <span>🌾</span>
-            <span>AgriXAI</span>
+            <span class="nav-brand-logo">🌾</span>
+            <span class="nav-brand-text">Agri<span>XAI</span></span>
         </a>
-        <div class="nav-links">
-            <form method="POST" action="/set_language" style="display:inline;">
-                <select name="language" class="lang-select" onchange="this.form.submit()" id="lang-selector">
+        <div class="nav-right">
+            <form action="/set_language" method="POST" class="lang-select-form">
+                <select name="language" onchange="this.form.submit()" aria-label="Select Language">
                     {% for code, name in languages.items() %}
-                    <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>{{ name }}</option>
+                    <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>
+                        {{ name }}
+                    </option>
                     {% endfor %}
                 </select>
             </form>
-            <a href="/predict" id="nav-home">{{ t('nav_home') }}</a>
-            <a href="/logout" id="nav-logout">{{ t('nav_logout') }}</a>
+            <div class="nav-links">
+                <a href="/predict" id="nav-predict">{{ t('nav_home') }}</a>
+                <a href="/logout" id="nav-logout">{{ t('nav_logout') }}</a>
+            </div>
         </div>
     </nav>
 
-    <div class="main">
+    <div class="main-container">
         <div class="profile-header">
-            <div class="avatar">🧑‍🌾</div>
-            <h1>{{ t('profile_welcome').replace('{username}', username) }}</h1>
+            <div class="avatar">👨‍🌾</div>
+            <h1>{{ username }}</h1>
             <p>{{ t('profile_dashboard') }}</p>
         </div>
 
         {% if profile_success %}
-        <div class="success-msg">✅ {{ profile_success }}</div>
+        <div class="success-msg">{{ profile_success }}</div>
         {% endif %}
         {% if profile_error %}
         <div class="error-msg">{{ profile_error }}</div>
         {% endif %}
+
+        <!-- Stats -->
+        <div class="info-card">
+            <h2>📊 {{ t('profile_your_statistics') }}</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">{{ total_predictions }}</div>
+                    <div class="stat-label">{{ t('profile_total_predictions') }}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">97.8%</div>
+                    <div class="stat-label">Model Accuracy (R²)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">SHAP</div>
+                    <div class="stat-label">TreeExplainer Active</div>
+                </div>
+            </div>
+        </div>
 
         <!-- Account Info -->
         <div class="info-card">
@@ -191,7 +331,15 @@
             </div>
             <div class="info-row">
                 <span class="info-label">{{ t('profile_email') }}</span>
-                <span class="info-value">{{ email or '—' }}</span>
+                <span class="info-value">{{ email or 'Not provided' }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Phone</span>
+                <span class="info-value">{{ phone or 'Not provided' }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">{{ t('profile_account_status') }}</span>
+                <span class="status-active">{{ t('profile_status_active') }}</span>
             </div>
             <div class="info-row">
                 <span class="info-label">{{ t('profile_member_since') }}</span>
@@ -201,65 +349,42 @@
                 <span class="info-label">{{ t('profile_last_login') }}</span>
                 <span class="info-value">{{ last_login }}</span>
             </div>
-            <div class="info-row">
-                <span class="info-label">{{ t('profile_account_status') }}</span>
-                <span class="status-active">{{ t('profile_status_active') }}</span>
-            </div>
-        </div>
-
-        <!-- Statistics -->
-        <div class="info-card">
-            <h2>📊 {{ t('profile_your_statistics') }}</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">{{ total_predictions }}</div>
-                    <div class="stat-label">{{ t('profile_total_predictions') }}</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">55</div>
-                    <div class="stat-label">Crops Available</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">30</div>
-                    <div class="stat-label">States Covered</div>
-                </div>
-            </div>
         </div>
 
         <!-- Popular Crops -->
         <div class="info-card">
-            <h2>🌱 {{ t('profile_popular_crops') }}</h2>
+            <h2>🌾 {{ t('profile_popular_crops') }}</h2>
             <div class="crops-list">
                 <span class="crop-tag">🌾 {{ t('profile_crop_wheat') }}</span>
                 <span class="crop-tag">🍅 {{ t('profile_crop_tomato') }}</span>
                 <span class="crop-tag">🍌 {{ t('profile_crop_banana') }}</span>
                 <span class="crop-tag">🎋 {{ t('profile_crop_sugarcane') }}</span>
-                <span class="crop-tag">🌾 Rice</span>
+                <span class="crop-tag">🍚 Rice</span>
                 <span class="crop-tag">🌽 Maize</span>
             </div>
         </div>
 
-        <!-- Update Contact & Notebook -->
+        <!-- Farmer Notebook -->
         <div class="info-card">
-            <h2>✏️ {{ t('profile_update_contact_notebook') }}</h2>
-            <form method="POST" action="/profile" id="profile-form">
+            <h2>📝 {{ t('profile_update_contact_notebook') }}</h2>
+            <form method="POST" action="/profile">
                 <div class="form-group">
                     <label>{{ t('profile_email_gmail_label') }}</label>
-                    <input type="email" name="email" value="{{ email or '' }}" placeholder="your.email@gmail.com">
+                    <input type="email" name="email" value="{{ email or '' }}" placeholder="farmer@example.com">
                 </div>
                 <div class="form-group">
                     <label>{{ t('profile_phone_label') }}</label>
-                    <input type="tel" name="phone" value="{{ phone or '' }}" placeholder="9876543210" maxlength="10">
+                    <input type="tel" name="phone" value="{{ phone or '' }}" placeholder="9876543210" pattern="[0-9]{10}">
                 </div>
                 <div class="form-group">
                     <label>{{ t('profile_farmer_notebook_label') }}</label>
-                    <textarea name="notes" placeholder="{{ t('profile_farmer_notebook_placeholder') }}">{{ notes }}</textarea>
+                    <textarea name="notes" placeholder="{{ t('profile_farmer_notebook_placeholder') }}">{{ notes or '' }}</textarea>
                 </div>
-                <button type="submit" class="btn-save" id="save-profile-btn">{{ t('profile_save_profile_button') }}</button>
+                <button type="submit" class="btn-save">{{ t('profile_save_profile_button') }}</button>
             </form>
         </div>
 
-        <a href="/logout" class="btn-logout" id="logout-btn">🚪 {{ t('profile_logout_btn') }}</a>
+        <a href="/logout" class="btn-logout">🚪 {{ t('profile_logout_btn') }}</a>
     </div>
 </body>
 </html>

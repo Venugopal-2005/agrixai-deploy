@@ -1,145 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up — AgriXAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>{{ t('nav_signup') }} — AgriXAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', sans-serif; min-height: 100vh;
-            background: linear-gradient(135deg, #0a1f0a 0%, #1a3a1a 30%, #0d2b0d 70%, #061206 100%);
-            color: #e0f0e0; display: flex; align-items: center; justify-content: center; padding: 1rem;
+            font-family: 'Inter', 'Noto Sans Kannada', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #07190d 0%, #0d2816 50%, #051209 100%);
+            color: #e2f0e6;
+            display: flex;
+            flex-direction: column;
         }
-        .bg-pattern {
-            position: fixed; inset: 0; z-index: 0;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(34,197,94,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(22,163,74,0.06) 0%, transparent 50%);
+
+        /* Navbar */
+        .navbar {
+            background: rgba(9, 32, 18, 0.85);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+            padding: 0.9rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+        .nav-brand-logo { font-size: 1.6rem; }
+        .nav-brand-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .nav-brand-text span { color: #4ade80; }
+        .lang-select-form select {
+            background: #092014;
+            color: #86efac;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            border-radius: 8px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .signup-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
         }
         .card {
-            position: relative; z-index: 1; width: 100%; max-width: 440px;
-            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.15);
-            border-radius: 24px; padding: 2.5rem 2rem; backdrop-filter: blur(20px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            width: 100%;
+            max-width: 460px;
+            background: rgba(14, 35, 22, 0.9);
+            border: 1px solid rgba(74, 222, 128, 0.25);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 16px 50px rgba(0,0,0,0.4);
         }
-        .header { text-align: center; margin-bottom: 2rem; }
+        .header { text-align: center; margin-bottom: 1.8rem; }
         .header .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .header h1 {
-            font-size: 1.8rem; font-weight: 800;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
+        .header h1 { font-size: 1.6rem; font-weight: 800; color: #ffffff; }
         .header p { color: #86efac; font-size: 0.85rem; margin-top: 0.3rem; }
+
         .error-msg {
-            background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3);
-            border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.5rem;
-            font-size: 0.85rem; color: #fca5a5; text-align: center;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
+            color: #fca5a5;
+            text-align: center;
         }
+
         .form-group { margin-bottom: 1rem; }
         .form-group label {
-            display: block; font-size: 0.8rem; font-weight: 600;
-            color: #86efac; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px;
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.3px;
         }
-        .form-group input, .form-group select {
-            width: 100%; padding: 0.8rem 1rem; border-radius: 10px; font-size: 0.95rem;
-            background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2);
-            color: #e0f0e0; outline: none; transition: border-color 0.3s;
-            font-family: 'Inter', sans-serif;
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: rgba(6, 23, 13, 0.8);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.3s;
+            font-family: inherit;
         }
-        .form-group input:focus, .form-group select:focus { border-color: #22c55e; }
-        .form-group input::placeholder { color: rgba(134,239,172,0.3); }
-        .form-group select option { background: #1a3a1a; color: #e0f0e0; }
+        .form-group input:focus {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+        }
         .radio-group { display: flex; gap: 1.5rem; margin-top: 0.3rem; }
         .radio-group label {
-            display: flex; align-items: center; gap: 0.4rem;
-            font-size: 0.85rem; font-weight: 500; color: #86efac;
-            cursor: pointer; text-transform: none; letter-spacing: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #bbf7d0;
+            cursor: pointer;
         }
-        .radio-group input[type="radio"] { accent-color: #22c55e; width: 16px; height: 16px; }
-        .btn {
-            width: 100%; padding: 0.9rem; border-radius: 12px; font-size: 1rem;
-            font-weight: 700; border: none; cursor: pointer; transition: all 0.3s;
-            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-            font-family: 'Inter', sans-serif;
+        .radio-group input[type="radio"] { accent-color: #22c55e; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.9rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+            transition: all 0.2s;
+            font-family: inherit;
         }
-        .btn-primary {
-            background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff;
-            box-shadow: 0 4px 20px rgba(34,197,94,0.3); margin-top: 0.5rem;
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(34,197,94,0.4); }
-        .links {
-            text-align: center; margin-top: 1.5rem; font-size: 0.85rem; color: rgba(134,239,172,0.5);
+        .footer-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
         }
-        .links a { color: #4ade80; text-decoration: none; font-weight: 600; }
-        .links a:hover { text-decoration: underline; }
+        .footer-link a { color: #4ade80; text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-    <div class="card">
-        <div class="header">
-            <div class="icon">📝</div>
-            <h1>Create Account</h1>
-            <p>Join AgriXAI — Crop Yield Advisory System</p>
-        </div>
-
-        {% if error %}
-        <div class="error-msg" id="signup-error">{{ error }}</div>
-        {% endif %}
-
-        <form method="POST" action="/signup" id="signup-form">
-            <div class="form-group">
-                <label for="username">Username *</label>
-                <input type="text" id="username" name="username" placeholder="Choose a username" required>
-            </div>
-
-            <div class="form-group">
-                <label>Sign up with</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="signup_method" value="email" checked> Email</label>
-                    <label><input type="radio" name="signup_method" value="phone"> Phone</label>
-                </div>
-            </div>
-
-            <div class="form-group" id="email-group">
-                <label for="email">Email (Gmail)</label>
-                <input type="email" id="email" name="email" placeholder="your.email@gmail.com">
-            </div>
-
-            <div class="form-group" id="phone-group" style="display:none;">
-                <label for="phone">Phone Number (10 digits)</label>
-                <input type="tel" id="phone" name="phone" placeholder="9876543210" maxlength="10">
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password *</label>
-                <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required minlength="6">
-            </div>
-
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password *</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary" id="signup-submit-btn">📝 Create Account</button>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="nav-brand-logo">🌾</span>
+            <span class="nav-brand-text">Agri<span>XAI</span></span>
+        </a>
+        <form action="/set_language" method="POST" class="lang-select-form">
+            <select name="language" onchange="this.form.submit()" aria-label="Select Language">
+                {% for code, name in languages.items() %}
+                <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>
+                    {{ name }}
+                </option>
+                {% endfor %}
+            </select>
         </form>
+    </nav>
 
-        <div class="links">
-            Already have an account? <a href="/login" id="goto-login">Login</a>
-            <br><br>
-            <a href="/" id="goto-home">← Back to Home</a>
+    <div class="signup-wrapper">
+        <div class="card">
+            <div class="header">
+                <div class="icon">📝</div>
+                <h1>{{ t('nav_signup') }}</h1>
+                <p>Create your AgriXAI Account</p>
+            </div>
+
+            {% if error %}
+            <div class="error-msg">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" action="/signup" id="signup-form">
+                <div class="form-group">
+                    <label>Sign Up Method</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="signup_method" value="email" checked onchange="toggleMethod('email')"> Email
+                        </label>
+                        <label>
+                            <input type="radio" name="signup_method" value="phone" onchange="toggleMethod('phone')"> Mobile Number
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="email-field">
+                    <label>Email Address</label>
+                    <input type="email" name="email" id="signup-email" placeholder="farmer@example.com">
+                </div>
+
+                <div class="form-group" id="phone-field" style="display:none;">
+                    <label>Phone Number (10 digits)</label>
+                    <input type="tel" name="phone" id="signup-phone" placeholder="9876543210" pattern="[0-9]{10}">
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" id="signup-username" placeholder="Choose a username" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" id="signup-password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" name="confirm_password" id="signup-confirm-password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-submit" id="signup-submit-btn">
+                    <span>✅</span> Create Account
+                </button>
+            </form>
+
+            <div class="footer-link">
+                Already registered? <a href="/login">{{ t('nav_login') }}</a>
+            </div>
         </div>
     </div>
 
     <script>
-        document.querySelectorAll('input[name="signup_method"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                document.getElementById('email-group').style.display = this.value === 'email' ? 'block' : 'none';
-                document.getElementById('phone-group').style.display = this.value === 'phone' ? 'block' : 'none';
-            });
-        });
+        function toggleMethod(method) {
+            document.getElementById('email-field').style.display = method === 'email' ? 'block' : 'none';
+            document.getElementById('phone-field').style.display = method === 'phone' ? 'block' : 'none';
+        }
     </script>
 </body>
 </html>

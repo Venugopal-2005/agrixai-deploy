@@ -1,129 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predict — AgriXAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>{{ t('predict_enter_farm_details') }} — AgriXAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', sans-serif; min-height: 100vh;
-            background: linear-gradient(135deg, #0a1f0a 0%, #1a3a1a 30%, #0d2b0d 70%, #061206 100%);
-            color: #e0f0e0;
+            font-family: 'Inter', 'Noto Sans Kannada', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #07190d 0%, #0d2816 50%, #051209 100%);
+            color: #e2f0e6;
+            line-height: 1.5;
         }
-        .bg-pattern {
-            position: fixed; inset: 0; z-index: 0;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(34,197,94,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(22,163,74,0.06) 0%, transparent 50%);
-        }
+
         /* Navbar */
         .navbar {
-            position: relative; z-index: 10;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 1rem 2rem; background: rgba(10,20,10,0.8);
-            border-bottom: 1px solid rgba(34,197,94,0.1); backdrop-filter: blur(10px);
+            background: rgba(9, 32, 18, 0.85);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+            padding: 0.9rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-        .nav-brand span:first-child { font-size: 1.5rem; }
-        .nav-brand span:last-child {
-            font-size: 1.2rem; font-weight: 800;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
         }
-        .nav-links { display: flex; align-items: center; gap: 1.2rem; }
+        .nav-brand-logo { font-size: 1.6rem; }
+        .nav-brand-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .nav-brand-text span { color: #4ade80; }
+        .nav-badge {
+            font-size: 0.65rem;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22c55e;
+            color: #4ade80;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: 0.4rem;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
         .nav-links a {
-            color: #86efac; text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            padding: 0.4rem 0.8rem; border-radius: 8px; transition: all 0.2s;
+            color: #bbf7d0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.2s;
         }
-        .nav-links a:hover { background: rgba(34,197,94,0.1); }
-        .nav-links .user-badge {
-            background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.2);
-            padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; color: #4ade80;
+        .nav-links a:hover {
+            background: rgba(34, 197, 94, 0.15);
+            color: #ffffff;
         }
-        .lang-select {
-            background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2);
-            color: #86efac; padding: 0.3rem 0.5rem; border-radius: 8px; font-size: 0.8rem;
-            cursor: pointer; outline: none; font-family: 'Inter', sans-serif;
+        .user-badge {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #4ade80;
+            font-weight: 600;
         }
-        .lang-select option { background: #1a3a1a; color: #e0f0e0; }
+        .lang-select-form select {
+            background: #092014;
+            color: #86efac;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            border-radius: 8px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
+        }
 
-        /* Main */
-        .main {
-            position: relative; z-index: 1;
-            max-width: 700px; margin: 2rem auto; padding: 0 1.5rem 3rem;
+        /* Main Form */
+        .main-container {
+            max-width: 760px;
+            margin: 2.5rem auto;
+            padding: 0 1.2rem 4rem;
         }
-        .page-title {
-            text-align: center; margin-bottom: 2rem;
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
-        .page-title h1 {
-            font-size: 1.6rem; font-weight: 700; color: #e0f0e0; margin-bottom: 0.3rem;
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.4rem;
         }
-        .page-title p { font-size: 0.85rem; color: rgba(134,239,172,0.5); }
+        .page-header p {
+            font-size: 0.95rem;
+            color: #86efac;
+        }
 
         .form-card {
-            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.12);
-            border-radius: 20px; padding: 2rem; backdrop-filter: blur(20px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            background: rgba(14, 35, 22, 0.9);
+            border: 1px solid rgba(74, 222, 128, 0.25);
+            border-radius: 20px;
+            padding: 2.2rem;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
         }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-        .form-group { display: flex; flex-direction: column; }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.3rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
         .form-group.full { grid-column: 1 / -1; }
         .form-group label {
-            font-size: 0.78rem; font-weight: 600; color: #86efac;
-            margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px;
-            display: flex; align-items: center; gap: 0.3rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 0.45rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            letter-spacing: 0.3px;
         }
         .form-group input, .form-group select {
-            padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.95rem;
-            background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.18);
-            color: #e0f0e0; outline: none; transition: border-color 0.3s;
-            font-family: 'Inter', sans-serif;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: rgba(6, 23, 13, 0.8);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            color: #ffffff;
+            outline: none;
+            transition: all 0.2s;
+            font-family: inherit;
         }
-        .form-group input:focus, .form-group select:focus { border-color: #22c55e; }
-        .form-group select option { background: #1a3a1a; color: #e0f0e0; }
-        .form-group input::placeholder { color: rgba(134,239,172,0.3); }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+        }
+        .form-group select option {
+            background: #092014;
+            color: #ffffff;
+        }
+        .form-group input::placeholder {
+            color: rgba(226, 240, 230, 0.4);
+        }
+
+        .notice-box {
+            grid-column: 1 / -1;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.82rem;
+            color: #bbf7d0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.4rem;
+        }
+
         .btn-predict {
-            width: 100%; padding: 1rem; border-radius: 14px; font-size: 1.05rem;
-            font-weight: 700; border: none; cursor: pointer; margin-top: 1.5rem;
-            background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff;
-            box-shadow: 0 6px 24px rgba(34,197,94,0.3); transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
         }
-        .btn-predict:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(34,197,94,0.4); }
+        .btn-predict:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(22, 163, 74, 0.5);
+        }
 
         @media (max-width: 600px) {
             .form-grid { grid-template-columns: 1fr; }
-            .navbar { padding: 0.8rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+            .navbar { padding: 0.8rem 1rem; flex-wrap: wrap; gap: 0.6rem; }
+            .nav-right { width: 100%; justify-content: space-between; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-
+    <!-- Navigation -->
     <nav class="navbar">
         <a href="/predict" class="nav-brand">
-            <span>🌾</span>
-            <span>AgriXAI</span>
+            <span class="nav-brand-logo">🌾</span>
+            <span class="nav-brand-text">Agri<span>XAI</span></span>
+            <span class="nav-badge">AI Advisory</span>
         </a>
-        <div class="nav-links">
-            <form method="POST" action="/set_language" style="display:inline;">
-                <select name="language" class="lang-select" onchange="this.form.submit()" id="lang-selector">
+        <div class="nav-right">
+            <form action="/set_language" method="POST" class="lang-select-form">
+                <select name="language" onchange="this.form.submit()" aria-label="Select Language">
                     {% for code, name in languages.items() %}
-                    <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>{{ name }}</option>
+                    <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>
+                        {{ name }}
+                    </option>
                     {% endfor %}
                 </select>
             </form>
-            <span class="user-badge" id="user-badge">👤 {{ username }}</span>
-            <a href="/profile" id="nav-profile">{{ t('nav_profile') }}</a>
-            <a href="/logout" id="nav-logout">{{ t('nav_logout') }}</a>
+            <div class="nav-links">
+                <span class="user-badge" id="user-badge">👤 {{ username }}</span>
+                <a href="/profile" id="nav-profile">{{ t('nav_profile') }}</a>
+                <a href="/logout" id="nav-logout">{{ t('nav_logout') }}</a>
+            </div>
         </div>
     </nav>
 
-    <div class="main">
-        <div class="page-title">
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="page-header">
             <h1>🌿 {{ t('predict_enter_farm_details') }}</h1>
             <p>{{ t('app_tagline') }}</p>
         </div>
@@ -134,48 +254,61 @@
                     <div class="form-group">
                         <label>🌱 {{ t('predict_label_crop') }}</label>
                         <select name="Crop" id="crop-select" required>
-                            <option value="">-- Select Crop --</option>
+                            <option value="">-- Select Crop / ಬೆಳೆ ಆಯ್ಕೆಮಾಡಿ --</option>
                             {% for c in crops %}
                             <option value="{{ c }}">{{ c }}</option>
                             {% endfor %}
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label>🌦 {{ t('predict_label_season') }}</label>
                         <select name="Season" id="season-select" required>
-                            <option value="">-- Select Season --</option>
+                            <option value="">-- Select Season / ಹಂಗಾಮು --</option>
                             {% for s in seasons %}
                             <option value="{{ s }}">{{ s }}</option>
                             {% endfor %}
                         </select>
                     </div>
+
                     <div class="form-group full">
                         <label>📍 {{ t('predict_label_state') }}</label>
                         <select name="State" id="state-select" required>
-                            <option value="">-- Select State --</option>
+                            <option value="">-- Select State / ರಾಜ್ಯ --</option>
                             {% for st in states %}
                             <option value="{{ st }}">{{ st }}</option>
                             {% endfor %}
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label>🌾 {{ t('predict_label_area') }}</label>
                         <input type="number" name="Area" id="area-input" placeholder="e.g. 1000" step="any" min="0" required>
                     </div>
+
                     <div class="form-group">
                         <label>🌧 {{ t('predict_label_rainfall') }}</label>
                         <input type="number" name="Annual_Rainfall" id="rainfall-input" placeholder="e.g. 1200" step="any" min="0" required>
                     </div>
+
                     <div class="form-group">
                         <label>🧪 {{ t('predict_label_fertilizer') }}</label>
                         <input type="number" name="Fertilizer" id="fertilizer-input" placeholder="e.g. 50000" step="any" min="0" required>
                     </div>
+
                     <div class="form-group">
                         <label>🐛 {{ t('predict_label_pesticide') }}</label>
                         <input type="number" name="Pesticide" id="pesticide-input" placeholder="e.g. 500" step="any" min="0" required>
                     </div>
+
+                    <div class="notice-box">
+                        <span>ℹ️</span> Inputs will be analyzed using CatBoost Regression and TreeExplainer SHAP to generate your agricultural advisory verdict.
+                    </div>
                 </div>
-                <button type="submit" class="btn-predict" id="predict-btn">🌿 {{ t('predict_button_predict') }}</button>
+
+                <button type="submit" class="btn-predict" id="predict-btn">
+                    <span>⚡</span> {{ t('predict_button_predict') }}
+                </button>
             </form>
         </div>
     </div>

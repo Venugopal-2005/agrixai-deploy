@@ -1,128 +1,295 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_language }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriXAI — Intelligent Crop Yield Advisory System</title>
-    <meta name="description" content="AgriXAI uses Machine Learning and Explainable AI (SHAP) to predict crop yields and provide actionable insights for farmers.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>AgriXAI — Intelligent Crop Yield Advisory & Decision Support</title>
+    <meta name="description" content="AgriXAI uses Machine Learning and Explainable AI (SHAP) to predict crop yields and provide clear proceed-or-change decision guidance for farmers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Noto Sans Kannada', sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a1f0a 0%, #1a3a1a 30%, #0d2b0d 70%, #061206 100%);
-            color: #e0f0e0;
+            background: linear-gradient(135deg, #07190d 0%, #0d2816 50%, #051209 100%);
+            color: #e2f0e6;
+            line-height: 1.5;
             overflow-x: hidden;
         }
-        .bg-pattern {
-            position: fixed; inset: 0; z-index: 0;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(34,197,94,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(22,163,74,0.06) 0%, transparent 50%),
-                radial-gradient(circle at 50% 80%, rgba(74,222,128,0.05) 0%, transparent 50%);
+
+        /* Top Navbar */
+        .navbar {
+            background: rgba(9, 32, 18, 0.85);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .container {
-            position: relative; z-index: 1;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            min-height: 100vh; padding: 2rem; text-align: center;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
         }
-        .logo-icon {
-            font-size: 4rem; margin-bottom: 1rem;
-            animation: float 3s ease-in-out infinite;
+        .nav-brand-logo { font-size: 1.8rem; }
+        .nav-brand-text {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .nav-brand-text span { color: #4ade80; }
+        .nav-badge {
+            font-size: 0.7rem;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22c55e;
+            color: #4ade80;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-left: 0.4rem;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .lang-select-form select {
+            background: #092014;
+            color: #86efac;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* Hero */
+        .hero-section {
+            position: relative;
+            padding: 4.5rem 1.5rem 2.5rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .emblem-hero {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        .portal-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22c55e;
+            color: #4ade80;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.35rem 1rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 1.2rem;
         }
         h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800;
-            background: linear-gradient(135deg, #4ade80, #22c55e, #16a34a);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; margin-bottom: 0.5rem;
+            font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+        }
+        h1 span {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .tagline {
-            font-size: clamp(1rem, 2.5vw, 1.3rem); color: #86efac;
-            font-weight: 300; margin-bottom: 1.5rem; letter-spacing: 0.5px;
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            color: #86efac;
+            font-weight: 400;
+            margin-bottom: 1.2rem;
         }
-        .slogan {
-            font-size: clamp(0.85rem, 2vw, 1rem); color: rgba(134,239,172,0.6);
-            font-style: italic; margin-bottom: 3rem; max-width: 600px; line-height: 1.6;
+        .description {
+            font-size: 0.98rem;
+            color: #cbd5e1;
+            max-width: 720px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
         }
-        .features {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem; max-width: 800px; width: 100%; margin-bottom: 3rem;
+
+        /* Action Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3.5rem;
         }
-        .feature-card {
-            background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.15);
-            border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        .feature-card:hover {
-            transform: translateY(-4px); border-color: rgba(34,197,94,0.3);
-            box-shadow: 0 8px 32px rgba(34,197,94,0.15);
-        }
-        .feature-card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
-        .feature-card h3 { font-size: 0.95rem; font-weight: 600; color: #86efac; margin-bottom: 0.4rem; }
-        .feature-card p { font-size: 0.8rem; color: rgba(224,240,224,0.6); line-height: 1.4; }
-        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
         .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.9rem 2.2rem; border-radius: 12px; font-size: 1rem;
-            font-weight: 600; text-decoration: none; transition: all 0.3s ease;
-            border: none; cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.95rem 2.2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            font-family: inherit;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: #fff; box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+            border: none;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(34,197,94,0.4); }
-        .btn-outline {
-            background: transparent; color: #86efac;
-            border: 2px solid rgba(134,239,172,0.3);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(22, 163, 74, 0.5);
         }
-        .btn-outline:hover { border-color: #86efac; background: rgba(134,239,172,0.05); transform: translateY(-2px); }
-        .footer {
-            margin-top: 3rem; font-size: 0.8rem; color: rgba(134,239,172,0.35);
+        .btn-guest {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #4ade80;
+            color: #86efac;
         }
-        @media (max-width: 500px) {
-            .btn-group { flex-direction: column; width: 100%; max-width: 300px; }
-            .btn { justify-content: center; }
+        .btn-guest:hover {
+            background: rgba(34, 197, 94, 0.25);
+            transform: translateY(-2px);
         }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.4rem;
+            max-width: 960px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+        .feature-box {
+            background: rgba(14, 35, 22, 0.85);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: left;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .feature-box:hover {
+            border-color: #22c55e;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+        .feature-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+        .feature-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #86efac;
+            margin-bottom: 0.4rem;
+        }
+        .feature-desc {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.2rem 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6ee7b7;
+            background: #06170d;
+        }
+        .site-footer p { margin-bottom: 0.4rem; }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-    <div class="container">
-        <div class="logo-icon">🌾</div>
-        <h1>AgriXAI</h1>
-        <p class="tagline">Intelligent Crop Yield Advisory System</p>
-        <p class="slogan">"ALWAYS DO YOUR BEST — WHAT YOU PLAN NOW, YOU WILL HARVEST LATER"</p>
-
-        <div class="features">
-            <div class="feature-card">
-                <div class="icon">🤖</div>
-                <h3>AI-Powered Prediction</h3>
-                <p>Random Forest ML model trained on 19,689+ agricultural records</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🔍</div>
-                <h3>Explainable AI</h3>
-                <p>SHAP explanations reveal which factors drive yield predictions</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🌍</div>
-                <h3>27 Indian States</h3>
-                <p>Coverage across all major agricultural regions with 55 crop varieties</p>
-            </div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="nav-brand-logo">🌾</span>
+            <span class="nav-brand-text">Agri<span>XAI</span></span>
+            <span class="nav-badge">Explainable AI</span>
+        </a>
+        <div class="nav-right">
+            <form action="/set_language" method="POST" class="lang-select-form">
+                <select name="language" onchange="this.form.submit()" aria-label="Select Language">
+                    {% for code, name in languages.items() %}
+                    <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>
+                        {{ name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </form>
         </div>
+    </nav>
+
+    <!-- Hero Content -->
+    <div class="hero-section">
+        <div class="emblem-hero">🌱</div>
+        <div class="portal-badge-pill">
+            <span>✨</span> Precision Agritech & Explainable AI
+        </div>
+        <h1>Agri<span>XAI</span> Crop Yield Advisory</h1>
+        <div class="tagline">{{ t('app_tagline') }}</div>
+        <p class="description">
+            Harnessing Machine Learning and Explainable AI (SHAP TreeExplainer) to deliver transparent, data-driven agricultural yield predictions. Understand the environmental, soil, and crop factors driving your farm's productivity and receive clear actionable advice on whether to proceed with your crop plan or optimize it before planting.
+        </p>
 
         <div class="btn-group">
-            <a href="/login" class="btn btn-primary" id="welcome-login-btn">🔐 Login</a>
-            <a href="/signup" class="btn btn-outline" id="welcome-signup-btn">📝 Sign Up</a>
+            <a href="/login" class="btn btn-primary" id="login-btn">
+                <span>👨‍🌾</span> {{ t('nav_login') }}
+            </a>
+            <a href="/guest" class="btn btn-guest" id="guest-btn">
+                <span>⚡</span> Guest Demo Access / ಅತಿಥಿ ಪ್ರವೇಶ
+            </a>
+            <a href="/signup" class="btn btn-guest" id="signup-btn">
+                <span>📝</span> {{ t('nav_signup') }}
+            </a>
         </div>
-
-        <p class="footer">Built with ❤️ for Farmers &bull; Powered by Machine Learning &amp; SHAP</p>
     </div>
+
+    <!-- Features -->
+    <div class="features-grid">
+        <div class="feature-box">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">High-Accuracy ML Model</div>
+            <div class="feature-desc">Trained on comprehensive agricultural dataset parameters with R² = 0.9784 for reliable yield forecasts.</div>
+        </div>
+        <div class="feature-box">
+            <div class="feature-icon">🔍</div>
+            <div class="feature-title">SHAP Explainable AI</div>
+            <div class="feature-desc">Quantifies the positive and negative influence of each factor (Rainfall, Fertilizer, Area, Season) in tons/hectare.</div>
+        </div>
+        <div class="feature-box">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">Proceed vs. Change Plan</div>
+            <div class="feature-desc">Clear decision guidance for farmers to determine if current conditions support farming or if crop/input adjustments are needed.</div>
+        </div>
+        <div class="feature-box">
+            <div class="feature-icon">🌐</div>
+            <div class="feature-title">Kannada & Multilingual</div>
+            <div class="feature-desc">Complete language support in Kannada (ಕನ್ನಡ), Hindi, Telugu, Tamil, Marathi, Bengali, Gujarati, Punjabi, and English.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p><strong>AgriXAI</strong> — Intelligent Crop Yield Advisory & Decision Support System</p>
+        <p>Powered by Machine Learning & SHAP (SHapley Additive exPlanations) TreeExplainer</p>
+    </footer>
 </body>
 </html>

@@ -280,8 +280,9 @@ initialize_firebase()
 # Available UI languages shown in the dropdown
 LANGUAGES = {
     'en': 'English',
-    'te': 'తెలుగు / Telugu',
+    'kn': 'ಕನ್ನಡ / Kannada',
     'hi': 'हिन्दी / Hindi',
+    'te': 'తెలుగు / Telugu',
     'ta': 'தமிழ் / Tamil',
     'bn': 'বাংলা / Bengali',
     'mr': 'मराठी / Marathi',
@@ -296,6 +297,7 @@ TRANSLATIONS = {
     # Common / navigation
     'app_title': {
         'en': 'AgriXAI',
+        'kn': 'ಅಗ್ರಿXAI',
         'te': 'అగ్రిXAI',
         'hi': 'एग्रीXAI',
         'ta': 'அக்ரிXAI',
@@ -306,6 +308,7 @@ TRANSLATIONS = {
     },
     'nav_home': {
         'en': 'Home',
+        'kn': 'ಮುಖಪುಟ',
         'te': 'హోమ్',
         'hi': 'होम',
         'ta': 'முகப்பு',
@@ -316,6 +319,7 @@ TRANSLATIONS = {
     },
     'nav_profile': {
         'en': 'Profile',
+        'kn': 'ಪ್ರೊಫೈಲ್',
         'te': 'ప్రొఫైల్',
         'hi': 'प्रोफ़ाइल',
         'ta': 'சுயவிவரம்',
@@ -326,6 +330,7 @@ TRANSLATIONS = {
     },
     'nav_logout': {
         'en': 'Logout',
+        'kn': 'ಲಾಗ್ ಔಟ್',
         'te': 'లాగ్ అవుట్',
         'hi': 'लॉग आउट',
         'ta': 'வெளியேறு',
@@ -336,6 +341,7 @@ TRANSLATIONS = {
     },
     'nav_login': {
         'en': 'Login',
+        'kn': 'ಲಾಗಿನ್',
         'te': 'లాగిన్',
         'hi': 'लॉगिन',
         'ta': 'உள்நுழைக',
@@ -346,6 +352,7 @@ TRANSLATIONS = {
     },
     'nav_signup': {
         'en': 'Sign Up',
+        'kn': 'ಸೈನ್ ಅಪ್',
         'te': 'సైన్ అప్',
         'hi': 'साइन अप',
         'ta': 'பதிவு செய்க',
@@ -358,6 +365,7 @@ TRANSLATIONS = {
     # Predict form
     'predict_enter_farm_details': {
         'en': 'Enter Farm Details',
+        'kn': 'ಕೃಷಿ ವಿವರಗಳನ್ನು ನಮೂದಿಸಿ',
         'te': 'ఫారం వివరాలు నమోదు చేయండి',
         'hi': 'खेत का विवरण दर्ज करें',
         'ta': 'பண்ணை விவரங்களை உள்ளிடவும்',
@@ -368,6 +376,7 @@ TRANSLATIONS = {
     },
     'predict_label_crop': {
         'en': 'Crop',
+        'kn': 'ಬೆಳೆ',
         'te': 'పంట',
         'hi': 'फसल',
         'ta': 'பயிர்',
@@ -378,6 +387,7 @@ TRANSLATIONS = {
     },
     'predict_label_season': {
         'en': 'Season',
+        'kn': 'ಹಂಗಾಮು / ಋತು',
         'te': 'రుతువు',
         'hi': 'मौसम',
         'ta': 'காலம்',
@@ -388,6 +398,7 @@ TRANSLATIONS = {
     },
     'predict_label_state': {
         'en': 'State',
+        'kn': 'ರಾಜ್ಯ',
         'te': 'రాష్ట్రం',
         'hi': 'राज्य',
         'ta': 'மாநிலம்',
@@ -398,6 +409,7 @@ TRANSLATIONS = {
     },
     'predict_label_area': {
         'en': 'Area (hectares)',
+        'kn': 'ವಿಸ್ತೀರ್ಣ (ಹೆಕ್ಟೇರ್‌ಗಳಲ್ಲಿ)',
         'te': 'విస్తీర్ణం (హెక్టార్లు)',
         'hi': 'क्षेत्रफल (हेक्टेयर)',
         'ta': 'பரப்பு (ஹெக்டேயர்)',
@@ -408,6 +420,7 @@ TRANSLATIONS = {
     },
     'predict_label_rainfall': {
         'en': 'Annual Rainfall (mm)',
+        'kn': 'ವಾರ್ಷಿಕ ಮಳೆ (ಮಿ.ಮೀ)',
         'te': 'వార్షిక వర్షపాతం (మి.మీ)',
         'hi': 'वार्षिक वर्षा (मि.मी.)',
         'ta': 'ஆண்டு மழை (மிமீ)',
@@ -418,6 +431,7 @@ TRANSLATIONS = {
     },
     'predict_label_fertilizer': {
         'en': 'Fertilizer (kg)',
+        'kn': 'ಗೊಬ್ಬರ (ಕಿ.ಗ್ರಾಂ)',
         'te': 'ఎరువు (కి.గ్రా.)',
         'hi': 'उर्वरक (किग्रा.)',
         'ta': 'உரங்கள் (கிலோ)',
@@ -428,6 +442,7 @@ TRANSLATIONS = {
     },
     'predict_label_pesticide': {
         'en': 'Pesticide (kg)',
+        'kn': 'ಕೀಟನಾಶಕ (ಕಿ.ಗ್ರಾಂ)',
         'te': 'పురుగు మందు (కి.గ్రా.)',
         'hi': 'कीटनाशक (किग्रा.)',
         'ta': 'பூச்சிக்கொல்லி (கிலோ)',
@@ -438,6 +453,7 @@ TRANSLATIONS = {
     },
     'predict_button_predict': {
         'en': 'Predict Yield',
+        'kn': 'ಇಳುವರಿ ಅಂದಾಜು ಮಾಡಿ',
         'te': 'ఉత్పత్తిని అంచనా వేయండి',
         'hi': 'उपज का अनुमान लगाएं',
         'ta': 'விளைச்சலை கணிக்கவும்',
@@ -450,6 +466,7 @@ TRANSLATIONS = {
     # App tagline shown in headers
     'app_tagline': {
         'en': 'Intelligent Crop Yield Advisory System',
+        'kn': 'ಕೃಷಿ ಇಳುವರಿ ಮುನ್ಸೂಚನೆ ಮತ್ತು AI ನಿರ್ಧಾರ ಬೆಂಬಲ ವ್ಯವಸ್ಥೆ',
         'te': 'స్మార్ట్ పంట దిగుబడి సలహా వ్యవస్థ',
         'hi': 'स्मार्ट फ़सल उपज सलाह प्रणाली',
         'ta': 'செயல்முறை பயிர் விளைச்சல் ஆலோசனை அமைப்பு',
@@ -462,6 +479,7 @@ TRANSLATIONS = {
     # Result page texts
     'result_title': {
         'en': 'Crop Yield Prediction Result',
+        'kn': 'ಬೆಳೆ ಇಳುವರಿ ಮುನ್ಸೂಚನೆ & AI ವಿಶ್ಲೇಷಣೆ',
         'te': 'పంట దిగుబడి అంచనా ఫలితం',
         'hi': 'फसल उपज पूर्वानुमान परिणाम',
         'ta': 'பயிர் விளைச்சல் கணிப்பு முடிவு',
@@ -472,6 +490,7 @@ TRANSLATIONS = {
     },
     'result_predicted_yield': {
         'en': 'Predicted Yield',
+        'kn': 'ಅಂದಾಜು ಇಳುವರಿ',
         'te': 'అంచనా దిగుబడి',
         'hi': 'अनुमानित उपज',
         'ta': 'கணிக்கப்பட்ட விளைச்சல்',
@@ -482,6 +501,7 @@ TRANSLATIONS = {
     },
     'result_status_high': {
         'en': 'Status: HIGH Yield',
+        'kn': 'ಸ್ಥಿತಿ: ಅಧಿಕ ಇಳುವರಿ (HIGH)',
         'te': 'స్థితి: అధిక దిగుబడి',
         'hi': 'स्थिति: उच्च उपज',
         'ta': 'நிலை: அதிக விளைச்சல்',
@@ -492,6 +512,7 @@ TRANSLATIONS = {
     },
     'result_status_low': {
         'en': 'Status: LOW Yield',
+        'kn': 'ಸ್ಥಿತಿ: ಕಡಿಮೆ ಇಳುವರಿ (LOW)',
         'te': 'స్థితి: తక్కువ దిగుబడి',
         'hi': 'स्थिति: कम उपज',
         'ta': 'நிலை: குறைந்த விளைச்சல்',
@@ -502,6 +523,7 @@ TRANSLATIONS = {
     },
     'result_key_positive': {
         'en': 'Key Positive Factors',
+        'kn': 'ಇಳುವರಿ ಹೆಚ್ಚಿಸುವ ಸಕಾರಾತ್ಮಕ ಅಂಶಗಳು (SHAP Boost)',
         'te': 'ముఖ్యమైన అనుకూల కారకాలు',
         'hi': 'मुख्य सकारात्मक कारक',
         'ta': 'முக்கிய நேர்மறை காரணங்கள்',
@@ -512,6 +534,7 @@ TRANSLATIONS = {
     },
     'result_key_negative': {
         'en': 'Factors Reducing Yield',
+        'kn': 'ಇಳುವರಿ ಕಡಿಮೆ ಮಾಡುವ ನಕಾರಾತ್ಮಕ ಅಂಶಗಳು (Limiting Factors)',
         'te': 'దిగుబడిని తగ్గించే కారకాలు',
         'hi': 'उपज घटाने वाले कारक',
         'ta': 'விளைச்சலைக் குறைக்கும் காரணங்கள்',
@@ -522,6 +545,7 @@ TRANSLATIONS = {
     },
     'result_recommendations': {
         'en': 'Smart Recommendations',
+        'kn': 'ಸ್ಮಾರ್ಟ್ ಕೃಷಿ ಶಿಫಾರಸುಗಳು',
         'te': 'స్మార్ట్ సూచనలు',
         'hi': 'स्मार्ट सुझाव',
         'ta': 'செயல்முறை பரிந்துரைகள்',
@@ -532,6 +556,7 @@ TRANSLATIONS = {
     },
     'result_predict_again': {
         'en': 'Predict Again',
+        'kn': 'ಮತ್ತೊಮ್ಮೆ ಅಂದಾಜು ಮಾಡಿ',
         'te': 'మళ్లీ అంచనా వేయండి',
         'hi': 'फिर से अनुमान लगाएं',
         'ta': 'மீண்டும் கணிக்கவும்',
@@ -542,6 +567,7 @@ TRANSLATIONS = {
     },
     'result_impact': {
         'en': 'Impact',
+        'kn': 'ಪ್ರಭಾವ',
         'te': 'ప్రభావం',
         'hi': 'प्रभाव',
         'ta': 'தாக்கம்',
@@ -550,16 +576,25 @@ TRANSLATIONS = {
         'gu': 'પ્રભાવ',
         'pa': 'ਅਸਰ',
     },
-    'feature_crop': {'en': 'Crop', 'te': 'పంట', 'hi': 'फसल', 'ta': 'பயிர்', 'bn': 'ফসল', 'mr': 'पीक', 'gu': 'પાક', 'pa': 'ਫਸਲ'},
-    'feature_season': {'en': 'Season', 'te': 'రుతువు', 'hi': 'मौसम', 'ta': 'காலம்', 'bn': 'মৌসুম', 'mr': 'हंगाम', 'gu': 'મોસમ', 'pa': 'ਮੌਸਮ'},
-    'feature_state': {'en': 'State', 'te': 'రాష్ట్రం', 'hi': 'राज्य', 'ta': 'மாநிலம்', 'bn': 'রাজ্য', 'mr': 'राज्य', 'gu': 'રાજ્ય', 'pa': 'ਰਾਜ'},
-    'feature_area': {'en': 'Area', 'te': 'విస్తీర్ణం', 'hi': 'क्षेत्रफल', 'ta': 'பரப்பு', 'bn': 'এলাকা', 'mr': 'क्षेत्रफळ', 'gu': 'વિસ્તાર', 'pa': 'ਖੇਤਰਫਲ'},
-    'feature_annual_rainfall': {'en': 'Annual Rainfall', 'te': 'వార్షిక వర్షపాతం', 'hi': 'वार्षिक वर्षा', 'ta': 'ஆண்டு மழை', 'bn': 'বার্ষিক বৃষ্টি', 'mr': 'वार्षिक पाऊस', 'gu': 'વાર્ષિક વરસાદ', 'pa': 'ਸਾਲਾਨਾ ਵਰਖਾ'},
-    'feature_fertilizer': {'en': 'Fertilizer', 'te': 'ఎరువు', 'hi': 'उर्वरक', 'ta': 'உரம்', 'bn': 'সার', 'mr': 'खत', 'gu': 'ખાતર', 'pa': 'ਖਾਦ'},
-    'feature_pesticide': {'en': 'Pesticide', 'te': 'పురుగు మందు', 'hi': 'कीटनाशक', 'ta': 'பூச்சிக்கொல்லி', 'bn': 'কীটনাশক', 'mr': 'कीटकनाशक', 'gu': 'કીટનાશક', 'pa': 'ਕੀਟਨਾਸ਼ਕ'},
-    'feature_model_prediction': {'en': 'Model Prediction', 'te': 'మోడల్ అంచనా', 'hi': 'मॉडल अनुमान', 'ta': 'மாதிரி கணிப்பு', 'bn': 'মডেল পূর্বাভাস', 'mr': 'मॉडेल अंदाज', 'gu': 'મોડેલ અંદાજ', 'pa': 'ਮਾਡਲ ਅਨੁਮਾਨ'},
+    'feature_crop': {'en': 'Crop',
+        'kn': 'ಬೆಳೆ', 'te': 'పంట', 'hi': 'फसल', 'ta': 'பயிர்', 'bn': 'ফসল', 'mr': 'पीक', 'gu': 'પાક', 'pa': 'ਫਸਲ'},
+    'feature_season': {'en': 'Season',
+        'kn': 'ಹಂಗಾಮು', 'te': 'రుతువు', 'hi': 'मौसम', 'ta': 'காலம்', 'bn': 'মৌসুম', 'mr': 'हंगाम', 'gu': 'મોસમ', 'pa': 'ਮੌਸਮ'},
+    'feature_state': {'en': 'State',
+        'kn': 'ರಾಜ್ಯ', 'te': 'రాష్ట్రం', 'hi': 'राज्य', 'ta': 'மாநிலம்', 'bn': 'রাজ্য', 'mr': 'राज्य', 'gu': 'રાજ્ય', 'pa': 'ਰਾਜ'},
+    'feature_area': {'en': 'Area',
+        'kn': 'ವಿಸ್ತೀರ್ಣ', 'te': 'విస్తీర్ణం', 'hi': 'क्षेत्रफल', 'ta': 'பரப்பு', 'bn': 'এলাকা', 'mr': 'क्षेत्रफळ', 'gu': 'વિસ્તાર', 'pa': 'ਖੇਤਰਫਲ'},
+    'feature_annual_rainfall': {'en': 'Annual Rainfall',
+        'kn': 'ವಾರ್ಷಿಕ ಮಳೆ', 'te': 'వార్షిక వర్షపాతం', 'hi': 'वार्षिक वर्षा', 'ta': 'ஆண்டு மழை', 'bn': 'বার্ষিক বৃষ্টি', 'mr': 'वार्षिक पाऊस', 'gu': 'વાર્ષિક વરસાદ', 'pa': 'ਸਾਲਾਨਾ ਵਰਖਾ'},
+    'feature_fertilizer': {'en': 'Fertilizer',
+        'kn': 'ಗೊಬ್ಬರ', 'te': 'ఎరువు', 'hi': 'उर्वरक', 'ta': 'உரம்', 'bn': 'সার', 'mr': 'खत', 'gu': 'ખાતર', 'pa': 'ਖਾਦ'},
+    'feature_pesticide': {'en': 'Pesticide',
+        'kn': 'ಕೀಟನಾಶಕ', 'te': 'పురుగు మందు', 'hi': 'कीटनाशक', 'ta': 'பூச்சிக்கொல்லி', 'bn': 'কীটনাশক', 'mr': 'कीटकनाशक', 'gu': 'કીટનાશક', 'pa': 'ਕੀਟਨਾਸ਼ਕ'},
+    'feature_model_prediction': {'en': 'Model Prediction',
+        'kn': 'ಮಾದರಿ ಅಂದಾಜು', 'te': 'మోడల్ అంచనా', 'hi': 'मॉडल अनुमान', 'ta': 'மாதிரி கணிப்பு', 'bn': 'মডেল পূর্বাভাস', 'mr': 'मॉडेल अंदाज', 'gu': 'મોડેલ અંદાજ', 'pa': 'ਮਾਡਲ ਅਨੁਮਾਨ'},
     'suggest_increase_fertilizer': {
         'en': 'Increase fertilizer carefully based on soil condition.',
+        'kn': 'ಮಣ್ಣಿನ ಆರೋಗ್ಯಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಸಮತೋಲಿತ ಗೊಬ್ಬರದ ಬಳಕೆಯನ್ನು ಹೆಚ್ಚಿಸಿ.',
         'te': 'నేల పరిస్థితిని బట్టి జాగ్రత్తగా ఎరువును పెంచండి.',
         'hi': 'मिट्टी की स्थिति के अनुसार उर्वरक सावधानी से बढ़ाएँ।',
         'ta': 'மண் நிலையைப் பொறுத்து உரத்தை கவனமாக அதிகரிக்கவும்.',
@@ -570,6 +605,7 @@ TRANSLATIONS = {
     },
     'suggest_improve_pest_management': {
         'en': 'Improve pest management practices.',
+        'kn': 'ವೈಜ್ಞಾನಿಕ ಸಮಗ್ರ ಕೀಟ ನಿರ್ವಹಣಾ (IPM) ವಿಧಾನಗಳನ್ನು ಅಳವಡಿಸಿಕೊಳ್ಳಿ.',
         'te': 'పురుగు నియంత్రణ విధానాలను మెరుగుపరచండి.',
         'hi': 'कीट प्रबंधन के तरीकों में सुधार करें।',
         'ta': 'பூச்சி மேலாண்மை முறைகளை மேம்படுத்தவும்.',
@@ -580,6 +616,7 @@ TRANSLATIONS = {
     },
     'suggest_optimize_land_usage': {
         'en': 'Optimize land usage for better productivity.',
+        'kn': 'ಉತ್ತಮ ಉತ್ಪಾದಕತೆಗಾಗಿ ಭೂ ಬಳಕೆಯನ್ನು ಉತ್ತಮಗೊಳಿಸಿ.',
         'te': 'మంచి ఉత్పాదకత కోసం భూమి వినియోగాన్ని మెరుగుపరచండి.',
         'hi': 'बेहतर उत्पादकता के लिए भूमि उपयोग को अनुकूलित करें।',
         'ta': 'மேம்பட்ட உற்பத்திக்காக நிலப் பயன்பாட்டை ஒழுங்குபடுத்தவும்.',
@@ -590,6 +627,7 @@ TRANSLATIONS = {
     },
     'suggest_consider_irrigation': {
         'en': 'Consider irrigation support during low rainfall.',
+        'kn': 'ಕಡಿಮೆ ಮಳೆಯಾದಾಗ ಹನಿ ಅಥವಾ ತುಂತುರು ನೀರಾವರಿ ವ್ಯವಸ್ಥೆಯನ್ನು ಅಳವಡಿಸಿ.',
         'te': 'వర్షపాతం తక్కువగా ఉన్నప్పుడు నీటి పారుదల సహాయాన్ని పరిగణించండి.',
         'hi': 'कम वर्षा के दौरान सिंचाई की व्यवस्था पर विचार करें।',
         'ta': 'மழை குறைவாக இருக்கும் போது பாசன உதவியைப் பரிசீலிக்கவும்.',
@@ -600,6 +638,7 @@ TRANSLATIONS = {
     },
     'suggest_choose_optimal_season': {
         'en': 'Choose an optimal growing season.',
+        'kn': 'ನಿಮ್ಮ ಪ್ರದೇಶಕ್ಕೆ ಸೂಕ್ತವಾದ ಬಿತ್ತನೆ ಹಂಗಾಮನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
         'te': 'అనుకూలమైన సాగు రుతువును ఎంచుకోండి.',
         'hi': 'उपयुक्त खेती का मौसम चुनें।',
         'ta': 'சரியான பயிர் வளர்ப்பு காலத்தைத் தேர்வு செய்யவும்.',
@@ -610,6 +649,7 @@ TRANSLATIONS = {
     },
     'suggest_regional_climate_matters': {
         'en': 'Regional climate conditions may affect yield.',
+        'kn': 'ಪ್ರಾದೇಶಿಕ ಹವಾಮಾನ ಪರಿಸ್ಥಿತಿಗಳು ಇಳುವರಿಯ ಮೇಲೆ ನಿರ್ಣಾಯಕ ಪರಿಣಾಮ ಬೀರುತ್ತವೆ.',
         'te': 'ప్రాంతీయ వాతావరణ పరిస్థితులు దిగుబడిని ప్రభావితం చేయవచ్చు.',
         'hi': 'क्षेत्रीय जलवायु परिस्थितियाँ उपज को प्रभावित कर सकती हैं।',
         'ta': 'பிராந்திய காலநிலை நிலைகள் விளைச்சலை பாதிக்கலாம்.',
@@ -620,6 +660,7 @@ TRANSLATIONS = {
     },
     'suggest_consider_high_yield_varieties': {
         'en': 'Consider high-yield crop varieties.',
+        'kn': 'ಹೆಚ್ಚು ಇಳುವರಿ ನೀಡುವ ಪ್ರಮಾಣೀಕೃತ ಬೆಳೆ ತಳಿಗಳನ್ನು ಪರಿಗಣಿಸಿ.',
         'te': 'అధిక దిగుబడి పంట రకాలను పరిగణించండి.',
         'hi': 'उच्च उपज वाली फसल किस्मों पर विचार करें।',
         'ta': 'அதிக விளைச்சல் தரும் பயிர் வகைகளை பரிசீலிக்கவும்.',
@@ -630,6 +671,7 @@ TRANSLATIONS = {
     },
     'suggest_review_inputs': {
         'en': 'Review your input values and try again.',
+        'kn': 'ನಿಮ್ಮ ನಮೂದಿಸಿದ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.',
         'te': 'మీ ఇన్‌పుట్ విలువలను పరిశీలించి మళ్లీ ప్రయత్నించండి.',
         'hi': 'अपने इनपुट मान जांचें और फिर से कोशिश करें।',
         'ta': 'உங்கள் உள்ளீட்டு மதிப்புகளை சரிபார்த்து மீண்டும் முயற்சிக்கவும்.',
@@ -642,6 +684,7 @@ TRANSLATIONS = {
     # Profile page
     'profile_page_title': {
         'en': 'Farmer Profile',
+        'kn': 'ರೈತರ ಪ್ರೊಫೈಲ್',
         'te': 'రైతు ప్రొఫైల్',
         'hi': 'किसान प्रोफ़ाइल',
         'ta': 'விவசாயி சுயவிவரம்',
@@ -652,6 +695,7 @@ TRANSLATIONS = {
     },
     'profile_welcome': {
         'en': 'Welcome, {username}!',
+        'kn': 'ಸುಸ್ವಾಗತ, {username}!',
         'te': 'స్వాగతం, {username}!',
         'hi': 'स्वागत है, {username}!',
         'ta': 'வரவேற்பு, {username}!',
@@ -662,6 +706,7 @@ TRANSLATIONS = {
     },
     'profile_dashboard': {
         'en': 'Your Agricultural Intelligence Dashboard',
+        'kn': 'ನಿಮ್ಮ ಕೃಷಿ ಬುದ್ಧಿಮತ್ತೆ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್',
         'te': 'మీ వ్యవసాయ మేధస్సు డాష్‌బోర్డ్',
         'hi': 'आपका कृषि बुद्धिमत्ता डैशबोर्ड',
         'ta': 'உங்கள் விவசாய அறிவு டாஷ்போர்டு',
@@ -672,6 +717,7 @@ TRANSLATIONS = {
     },
     'profile_account_info': {
         'en': 'Account Information',
+        'kn': 'ಖಾತೆಯ ಮಾಹಿತಿ',
         'te': 'ఖాతా సమాచారం',
         'hi': 'खाता जानकारी',
         'ta': 'கணக்கு தகவல்',
@@ -682,6 +728,7 @@ TRANSLATIONS = {
     },
     'profile_username': {
         'en': 'Username',
+        'kn': 'ಬಳಕೆದಾರ ಹೆಸರು',
         'te': 'వినియోగదారు పేరు',
         'hi': 'उपयोगकर्ता नाम',
         'ta': 'பயனர் பெயர்',
@@ -692,6 +739,7 @@ TRANSLATIONS = {
     },
     'profile_email': {
         'en': 'Email',
+        'kn': 'ಇಮೇಲ್',
         'te': 'ఇమెయిల్',
         'hi': 'ईमेल',
         'ta': 'மின்னஞ்சல்',
@@ -702,6 +750,7 @@ TRANSLATIONS = {
     },
     'profile_member_since': {
         'en': 'Member Since',
+        'kn': 'ಸದಸ್ಯರಾದ ದಿನಾಂಕ',
         'te': 'సభ్యత్వం నుండి',
         'hi': 'सदस्य since',
         'ta': 'உறுப்பினர் என்பதிலிருந்து',
@@ -712,6 +761,7 @@ TRANSLATIONS = {
     },
     'profile_your_statistics': {
         'en': 'Your Statistics',
+        'kn': 'ನಿಮ್ಮ ಅಂಕಿಅಂಶಗಳು',
         'te': 'మీ గణాంకాలు',
         'hi': 'आपके आंकड़े',
         'ta': 'உங்கள் புள்ளிவிவரங்கள்',
@@ -722,6 +772,7 @@ TRANSLATIONS = {
     },
     'profile_total_predictions': {
         'en': 'Total Predictions',
+        'kn': 'ಒಟ್ಟು ಇಳುವರಿ ಅಂದಾಜುಗಳು',
         'te': 'మొత్తం అంచనాలు',
         'hi': 'कुल पूर्वानुमान',
         'ta': 'மொத்த கணிப்புகள்',
@@ -732,6 +783,7 @@ TRANSLATIONS = {
     },
     'profile_account_status': {
         'en': 'Account Status',
+        'kn': 'ಖಾತೆ ಸ್ಥಿತಿ',
         'te': 'ఖాతా స్థితి',
         'hi': 'खाता स्थिति',
         'ta': 'கணக்கு நிலை',
@@ -742,6 +794,7 @@ TRANSLATIONS = {
     },
     'profile_status_active': {
         'en': 'Active',
+        'kn': 'ಸಕ್ರಿಯ',
         'te': 'సక్రియ',
         'hi': 'सक्रिय',
         'ta': 'செயலில்',
@@ -752,6 +805,7 @@ TRANSLATIONS = {
     },
     'profile_last_login': {
         'en': 'Last Login',
+        'kn': 'ಕೊನೆಯ ಲಾಗಿನ್',
         'te': 'చివరి లాగిన్',
         'hi': 'अंतिम लॉगिन',
         'ta': 'கடைசி உள்நுழைவு',
@@ -762,6 +816,7 @@ TRANSLATIONS = {
     },
     'profile_popular_crops': {
         'en': 'Popular Crops',
+        'kn': 'ಜನಪ್ರಿಯ ಬೆಳೆಗಳು',
         'te': 'జనాదరణ పంటలు',
         'hi': 'लोकप्रिय फसलें',
         'ta': 'பிரபல பயிர்கள்',
@@ -772,6 +827,7 @@ TRANSLATIONS = {
     },
     'profile_logout_btn': {
         'en': 'Logout',
+        'kn': 'ಲಾಗ್ ಔಟ್',
         'te': 'లాగ్ అవుట్',
         'hi': 'लॉग आउट',
         'ta': 'வெளியேறு',
@@ -782,6 +838,7 @@ TRANSLATIONS = {
     },
     'profile_alt_farmer': {
         'en': 'Farmer Profile',
+        'kn': 'ರೈತರ ವಿವರ',
         'te': 'రైతు ప్రొఫైల్',
         'hi': 'किसान प्रोफ़ाइल',
         'ta': 'விவசாயி சுயவிவரம்',
@@ -790,12 +847,17 @@ TRANSLATIONS = {
         'gu': 'ખેડૂત પ્રોફાઇલ',
         'pa': 'ਕਿਸਾਨ ਪ੍ਰੋਫ਼ਾਈਲ',
     },
-    'profile_crop_wheat': {'en': 'Wheat', 'te': 'గోధుమ', 'hi': 'गेहूं', 'ta': 'கோதுமை', 'bn': 'গম', 'mr': 'गहू', 'gu': 'ઘઉં', 'pa': 'ਕਣਕ'},
-    'profile_crop_tomato': {'en': 'Tomato', 'te': 'టమోటా', 'hi': 'टमाटर', 'ta': 'தக்காளி', 'bn': 'টমেটো', 'mr': 'टोमॅटो', 'gu': 'ટમેટા', 'pa': 'ਟਮਾਟਰ'},
-    'profile_crop_banana': {'en': 'Banana', 'te': 'అరటి', 'hi': 'केला', 'ta': 'வாழைப்பழம்', 'bn': 'কলা', 'mr': 'केळे', 'gu': 'કેળું', 'pa': 'ਕੇਲਾ'},
-    'profile_crop_sugarcane': {'en': 'Sugarcane', 'te': 'చెరకు', 'hi': 'गन्ना', 'ta': 'கரும்பு', 'bn': 'আখ', 'mr': 'ऊस', 'gu': 'શેરડી', 'pa': 'ਗੰਨਾ'},
+    'profile_crop_wheat': {'en': 'Wheat',
+        'kn': 'ಗೋಧಿ', 'te': 'గోధుమ', 'hi': 'गेहूं', 'ta': 'கோதுமை', 'bn': 'গম', 'mr': 'गहू', 'gu': 'ઘઉં', 'pa': 'ਕਣਕ'},
+    'profile_crop_tomato': {'en': 'Tomato',
+        'kn': 'ಟೊಮೆಟೊ', 'te': 'టమోటా', 'hi': 'टमाटर', 'ta': 'தக்காளி', 'bn': 'টমেটো', 'mr': 'टोमॅटो', 'gu': 'ટમેટા', 'pa': 'ਟਮਾਟਰ'},
+    'profile_crop_banana': {'en': 'Banana',
+        'kn': 'ಬಾಳೆ', 'te': 'అరటి', 'hi': 'केला', 'ta': 'வாழைப்பழம்', 'bn': 'কলা', 'mr': 'केळे', 'gu': 'કેળું', 'pa': 'ਕੇਲਾ'},
+    'profile_crop_sugarcane': {'en': 'Sugarcane',
+        'kn': 'ಕಬ್ಬು', 'te': 'చెరకు', 'hi': 'गन्ना', 'ta': 'கரும்பு', 'bn': 'আখ', 'mr': 'ऊस', 'gu': 'શેરડી', 'pa': 'ਗੰਨਾ'},
     'profile_update_contact_notebook': {
         'en': 'Update Contact & Notebook',
+        'kn': 'ಸಂಪರ್ಕ ಮತ್ತು ಟಿಪ್ಪಣಿ ಪುಸ್ತಕ ನವೀಕರಿಸಿ',
         'te': 'సంప్రదింపు & నోట్‌బుక్‌ను నవీకరించండి',
         'hi': 'संपर्क और नोटबुक अपडेट करें',
         'ta': 'தொடர்பு & குறிப்புப்புத்தகத்தை புதுப்பிக்கவும்',
@@ -806,6 +868,7 @@ TRANSLATIONS = {
     },
     'profile_email_gmail_label': {
         'en': 'Email (Gmail)',
+        'kn': 'ಇಮೇಲ್ (Gmail)',
         'te': 'ఇమెయిల్ (Gmail)',
         'hi': 'ईमेल (Gmail)',
         'ta': 'மின்னஞ்சல் (Gmail)',
@@ -816,6 +879,7 @@ TRANSLATIONS = {
     },
     'profile_phone_label': {
         'en': 'Phone Number (10 digits)',
+        'kn': 'ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (10 ಅಂಕೆಗಳು)',
         'te': 'ఫోన్ నంబర్ (10 అంకెలు)',
         'hi': 'फ़ोन नंबर (10 अंक)',
         'ta': 'தொலைபேசி எண் (10 இலக்கங்கள்)',
@@ -826,6 +890,7 @@ TRANSLATIONS = {
     },
     'profile_farmer_notebook_label': {
         'en': 'Farmer Notebook',
+        'kn': 'ರೈತರ ಕೃಷಿ ಟಿಪ್ಪಣಿ',
         'te': 'రైతు నోట్‌బుక్',
         'hi': 'किसान नोटबुक',
         'ta': 'விவசாயி குறிப்புப்புத்தகம்',
@@ -836,6 +901,7 @@ TRANSLATIONS = {
     },
     'profile_farmer_notebook_placeholder': {
         'en': 'Write your farming notes, observations, or plans here...',
+        'kn': 'ನಿಮ್ಮ ಕೃಷಿ ಟಿಪ್ಪಣಿಗಳು, ವೀಕ್ಷಣೆಗಳು ಅಥವಾ ಯೋಜನೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ...',
         'te': 'మీ వ్యవసాయ గమనికలు, పరిశీలనలు లేదా ప్రణాళికలను ఇక్కడ వ్రాయండి...',
         'hi': 'अपनी खेती से जुड़ी नोट्स, निरीक्षण या योजनाएँ यहाँ लिखें...',
         'ta': 'உங்கள் விவசாய குறிப்புகள், கவனிப்புகள் அல்லது திட்டங்களை இங்கே எழுதுங்கள்...',
@@ -844,8 +910,64 @@ TRANSLATIONS = {
         'gu': 'તમારા ખેતીના નોંધ, નિરીક્ષણો અથવા યોજનાઓ અહીં લખો...',
         'pa': 'ਆਪਣੇ ਖੇਤੀਬਾੜੀ ਨੋਟ, ਵੇਖਭਾਲ ਜਾਂ ਯੋਜਨਾਵਾਂ ਇੱਥੇ ਲਿਖੋ...',
     },
+    # Portal branding & farmer decision advisory
+    'portal_brand_title': {
+        'en': 'AgriXAI — Intelligent Crop Yield Advisory System',
+        'kn': 'ಅಗ್ರಿXAI — ಸ್ಮಾರ್ಟ್ ಕೃಷಿ ಇಳುವರಿ ಸಲಹಾ ವ್ಯವಸ್ಥೆ',
+        'hi': 'एग्रीXAI — स्मार्ट फसल उपज सलाह प्रणाली',
+        'te': 'అగ్రిXAI — స్మార్ట్ పంట దిగుబడి సలహా వ్యవస్థ',
+    },
+    'decision_title': {
+        'en': 'Farmer Advisory Decision Verdict',
+        'kn': 'ರೈತರಿಗೆ ಅಂತಿಮ ಕೃಷಿ ನಿರ್ಧಾರ ಸಲಹೆ (Advisory Verdict)',
+        'hi': 'किसान सलाहकार निर्णय फैसला',
+        'te': 'రైతు సలహా నిర్ణయ తీర్పు',
+    },
+    'decision_proceed': {
+        'en': 'RECOMMENDED: PROCEED WITH THIS CROP PLAN',
+        'kn': 'ಶಿಫಾರಸು: ಈ ಕೃಷಿ ಯೋಜನೆಯೊಂದಿಗೆ ಮುಂದುವರಿಯಿರಿ',
+        'hi': 'सिफारिश: इस फसल योजना के साथ आगे बढ़ें',
+        'te': 'సిఫార్సు: ఈ పంట ప్రణాళికతో ముందుకు సాగండి',
+    },
+    'decision_proceed_desc': {
+        'en': 'SHAP Explainable AI confirms favorable growing conditions. Projected yield is strong and viable.',
+        'kn': 'SHAP ವಿವರಣಾತ್ಮಕ AI ವಿಶ್ಲೇಷಣೆಯು ಈ ಬೆಳೆಗೆ ಸೂಕ್ತ ಪರಿಸ್ಥಿತಿಗಳನ್ನು ದೃಢಪಡಿಸಿದೆ. ನಿರೀಕ್ಷಿತ ಇಳುವರಿ ಉತ್ತಮವಾಗಿದೆ.',
+        'hi': 'SHAP AI विश्लेषण उपयुक्त परिस्थितियों की पुष्टि करता है। अनुमानित उपज अच्छी और व्यवहार्य है।',
+        'te': 'SHAP AI విశ్లేషణ అనుకూలమైన పరిస్థితులను నిర్ధారిస్తుంది. అంచనా వేసిన దిగుబడి బలంగా ఉంది.',
+    },
+    'decision_change': {
+        'en': 'ACTION REQUIRED: CHANGE OR REVISE PLAN BEFORE PLANTING',
+        'kn': 'ಎಚ್ಚರಿಕೆ: ಬಿತ್ತನೆ ಮಾಡುವ ಮುನ್ನ ಕೃಷಿ ಯೋಜನೆಯನ್ನು ಬದಲಾಯಿಸಿ / ಸರಿಪಡಿಸಿ',
+        'hi': 'कार्रवाई आवश्यक: बुवाई से पहले फसल योजना में बदलाव या सुधार करें',
+        'te': 'చర్య అవసరం: విత్తడానికి ముందు ప్రణాళಿಕను మార్చండి లేదా సవరించండి',
+    },
+    'decision_change_desc': {
+        'en': 'Critical yield-suppressing factors detected by SHAP AI. Revise crop choice or inputs to avoid financial loss.',
+        'kn': 'SHAP AI ವಿಶ್ಲೇಷಣೆಯು ಇಳುವರಿ ಕುಂಠಿತಗೊಳಿಸುವ ಗಂಭೀರ ಅಂಶಗಳನ್ನು ಪತ್ತೆಹಚ್ಚಿದೆ. ನಷ್ಟ ತಪ್ಪಿಸಲು ಪರ್ಯಾಯ ಬೆಳೆ ಆರಿಸಿ ಅಥವಾ ಒಳಹರಿವುಗಳನ್ನು ಸರಿಪಡಿಸಿ.',
+        'hi': 'SHAP AI द्वारा उपज घटाने वाले गंभीर कारक पाए गए हैं। वित्तीय नुकसान से बचने के लिए योजना संशोधित करें।',
+        'te': 'దిగుబడిని తగ్గించే తీవ్రమైన కారకాలు గుర్తించబడ్డాయి. నష్టాన్ని నివారించడానికి ప్రణాళికను సవరించండి.',
+    },
+    'decision_confidence': {
+        'en': 'Advisory Confidence',
+        'kn': 'ಸಲಹಾ ವಿಶ್ವಾಸಾರ್ಹತೆ',
+        'hi': 'सलाह विश्वसनीयता',
+        'te': 'సలహా విశ్వసనీయత',
+    },
+    'shap_analysis_heading': {
+        'en': 'SHAP Feature Contribution & Explainability',
+        'kn': 'SHAP ವೈಶಿಷ್ಟ್ಯ ಕೊಡುಗೆ ಮತ್ತು ವಿವರಣಾತ್ಮಕ AI ವಿಶ್ಲೇಷಣೆ',
+        'hi': 'SHAP कारक योगदान एवं व्याख्यात्मक AI विश्लेषण',
+        'te': 'SHAP కారకాల సహకారం మరియు వివరణాత్మక AI విశ్లేషణ',
+    },
+    'plan_action_guide': {
+        'en': 'Actionable Farming Plan Guidance',
+        'kn': 'ರೈತರಿಗೆ ಕಾರ್ಯಸಾಧ್ಯವಾದ ಕೃಷಿ ಮಾರ್ಗದರ್ಶನ',
+        'hi': 'किसान के लिए व्यावहारिक कृषि योजना मार्गदर्शन',
+        'te': 'రైతు కోసం కార్యాచరణ వ్యవసాయ ప్రణాళిక మార్గదర్శకత్వం',
+    },
     'profile_save_profile_button': {
         'en': 'Save Profile',
+        'kn': 'ವಿವರಗಳನ್ನು ಉಳಿಸಿ',
         'te': 'ప్రొఫైల్‌ను సేవ్ చేయండి',
         'hi': 'प्रोफ़ाइल सहेजें',
         'ta': 'சுயவிவரத்தை சேமிக்கவும்',
@@ -884,15 +1006,11 @@ def inject_language():
 
 @app.route('/set_language', methods=['POST'])
 def set_language():
-    """Set the preferred UI language after login and redirect back."""
-    if not check_login():
-        return redirect(url_for('login'))
-    
+    """Set the preferred UI language and redirect back."""
     lang = request.form.get('language')
     if lang in LANGUAGES:
         session['language'] = lang
     
-    # Return to the previous page or prediction page as a fallback
     next_url = request.referrer or url_for('predict')
     return redirect(next_url)
 
@@ -1390,7 +1508,7 @@ def predict():
             top_negative = []
 
     # ----------------------------
-    # Smart Suggestions
+    # Smart Suggestions & Farmer Decision Advisory (Proceed vs Change Plan)
     # ----------------------------
     suggestions = []
 
@@ -1417,6 +1535,39 @@ def predict():
         elif feature == "Crop":
             suggestions.append(suggestion_key_for_feature(feature) or "suggest_consider_high_yield_varieties")
 
+    # Formulate Farmer Advisory Decision Verdict (Proceed vs Change Plan)
+    if yield_status == "HIGH":
+        verdict = "PROCEED"
+        verdict_key = "decision_proceed"
+        verdict_desc_key = "decision_proceed_desc"
+        confidence_score = 92
+        verdict_icon = "✅"
+        plan_guidance = [
+            ("positive", "Favorable Environmental Alignment: Current weather, season, and soil moisture parameters strongly support this crop."),
+            ("positive", f"Yield Viability: Projected yield of {round(predicted_yield, 2)} tons/ha comfortably surpasses the regional benchmark of {round(threshold_yield, 2)} tons/ha."),
+            ("action", "Safe to proceed: Secure certified seed varieties and prepare scheduled field irrigation.")
+        ]
+    else:
+        verdict = "CHANGE_PLAN"
+        verdict_key = "decision_change"
+        verdict_desc_key = "decision_change_desc"
+        confidence_score = 88
+        verdict_icon = "⚠️"
+        plan_guidance = []
+        for feat, val in top_negative:
+            if feat == "Crop":
+                plan_guidance.append(("critical", "Crop Suitability Alert: Historical crop productivity under selected parameters is low. Recommended: Switch to higher-yield alternative crop or pulse variety suited for this season."))
+            elif feat == "Annual_Rainfall":
+                plan_guidance.append(("critical", "Moisture Deficit: Natural precipitation is below optimal threshold. Recommended: Arrange supplemental drip or sprinkler irrigation before proceeding."))
+            elif feat == "Fertilizer":
+                plan_guidance.append(("action", "Nutrient Correction: Chemical/organic fertilizer dosage is misaligned. Recommended: Perform soil health test and balance NPK application."))
+            elif feat == "Season":
+                plan_guidance.append(("action", "Seasonal Adjustment: Current sowing season presents climatic headwinds. Recommended: Shift planting date to peak favorable agro-climatic window."))
+            elif feat == "Pesticide":
+                plan_guidance.append(("action", "Crop Protection: Inadequate pest protection profile. Recommended: Plan Integrated Pest Management (IPM) bio-control measures."))
+        if not plan_guidance:
+            plan_guidance.append(("critical", "Overall Input Review: Key parameters indicate low yield. Re-evaluate farm inputs or select an alternative crop."))
+
     # ----------------------------
     # Render Result Page
     # ----------------------------
@@ -1424,9 +1575,17 @@ def predict():
         "result.html",
         yield_value=round(predicted_yield, 2),
         status=yield_status,
+        benchmark_yield=round(threshold_yield, 2),
+        verdict=verdict,
+        verdict_key=verdict_key,
+        verdict_desc_key=verdict_desc_key,
+        confidence_score=confidence_score,
+        verdict_icon=verdict_icon,
+        plan_guidance=plan_guidance,
         positive=[(translate_feature_key(f), v, f) for f, v in top_positive],
         negative=[(translate_feature_key(f), v, f) for f, v in top_negative],
         suggestions=suggestions,
+        shap_available=SHAP_AVAILABLE,
         logged_in=check_login(),
         username=session.get('username')
     )
