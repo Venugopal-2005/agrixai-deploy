@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result — AgriXAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif; min-height: 100vh;
+            background: linear-gradient(135deg, #0a1f0a 0%, #1a3a1a 30%, #0d2b0d 70%, #061206 100%);
+            color: #e0f0e0;
+        }
+        .bg-pattern {
+            position: fixed; inset: 0; z-index: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(34,197,94,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(22,163,74,0.06) 0%, transparent 50%);
+        }
+        .navbar {
+            position: relative; z-index: 10;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 2rem; background: rgba(10,20,10,0.8);
+            border-bottom: 1px solid rgba(34,197,94,0.1); backdrop-filter: blur(10px);
+        }
+        .nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+        .nav-brand span:first-child { font-size: 1.5rem; }
+        .nav-brand span:last-child {
+            font-size: 1.2rem; font-weight: 800;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-links { display: flex; align-items: center; gap: 1rem; }
+        .nav-links a {
+            color: #86efac; text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            padding: 0.4rem 0.8rem; border-radius: 8px; transition: all 0.2s;
+        }
+        .nav-links a:hover { background: rgba(34,197,94,0.1); }
+
+        .main {
+            position: relative; z-index: 1;
+            max-width: 750px; margin: 2rem auto; padding: 0 1.5rem 3rem;
+        }
+
+        /* Hero result */
+        .result-hero {
+            text-align: center; padding: 2.5rem 2rem;
+            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.12);
+            border-radius: 24px; margin-bottom: 1.5rem; backdrop-filter: blur(20px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .result-hero h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; color: #86efac; }
+        .yield-value {
+            font-size: 3.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 0.3rem;
+        }
+        .yield-unit { font-size: 0.9rem; color: rgba(134,239,172,0.5); margin-bottom: 1rem; }
+        .status-badge {
+            display: inline-block; padding: 0.5rem 1.5rem; border-radius: 30px;
+            font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .status-high {
+            background: rgba(34,197,94,0.15); border: 2px solid #22c55e; color: #4ade80;
+        }
+        .status-low {
+            background: rgba(239,68,68,0.1); border: 2px solid rgba(239,68,68,0.4); color: #fca5a5;
+        }
+        .status-error {
+            background: rgba(239,68,68,0.1); border: 2px solid rgba(239,68,68,0.4); color: #fca5a5;
+        }
+
+        /* Cards */
+        .cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.5rem; }
+        .info-card {
+            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.12);
+            border-radius: 18px; padding: 1.5rem; backdrop-filter: blur(20px);
+        }
+        .info-card h2 {
+            font-size: 0.9rem; font-weight: 700; color: #86efac;
+            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .factor-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.6rem 0; border-bottom: 1px solid rgba(34,197,94,0.06);
+        }
+        .factor-item:last-child { border-bottom: none; }
+        .factor-name { font-size: 0.85rem; font-weight: 500; }
+        .factor-value {
+            font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+        }
+        .factor-positive { color: #4ade80; background: rgba(34,197,94,0.1); }
+        .factor-negative { color: #fca5a5; background: rgba(239,68,68,0.1); }
+
+        /* Suggestions */
+        .suggestions-card {
+            background: rgba(15,30,15,0.85); border: 1px solid rgba(34,197,94,0.12);
+            border-radius: 18px; padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(20px);
+        }
+        .suggestions-card h2 {
+            font-size: 0.9rem; font-weight: 700; color: #86efac;
+            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .suggestion-item {
+            display: flex; align-items: flex-start; gap: 0.6rem;
+            padding: 0.6rem 0; font-size: 0.85rem; color: rgba(224,240,224,0.8);
+        }
+        .suggestion-item::before { content: '💡'; flex-shrink: 0; }
+
+        /* Button */
+        .btn-again {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            width: 100%; max-width: 300px; margin: 0 auto; padding: 0.9rem;
+            border-radius: 14px; font-size: 1rem; font-weight: 700; border: none;
+            cursor: pointer; text-decoration: none;
+            background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff;
+            box-shadow: 0 4px 20px rgba(34,197,94,0.3); transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-again:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(34,197,94,0.4); }
+
+        @media (max-width: 600px) {
+            .cards-row { grid-template-columns: 1fr; }
+            .navbar { padding: 0.8rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <nav class="navbar">
+        <a href="/predict" class="nav-brand">
+            <span>🌾</span>
+            <span>AgriXAI</span>
+        </a>
+        <div class="nav-links">
+            <a href="/predict" id="nav-predict">{{ t('nav_home') }}</a>
+            <a href="/profile" id="nav-profile">{{ t('nav_profile') }}</a>
+            <a href="/logout" id="nav-logout">{{ t('nav_logout') }}</a>
+        </div>
+    </nav>
+
+    <div class="main">
+        <div class="result-hero">
+            <h1>📊 {{ t('result_title') }}</h1>
+            <div class="yield-value" id="yield-value">{{ yield_value }}</div>
+            <div class="yield-unit">{{ t('result_predicted_yield') }} (tonnes/hectare)</div>
+            {% if status == "HIGH" %}
+            <span class="status-badge status-high" id="yield-status">✅ {{ t('result_status_high') }}</span>
+            {% elif status == "LOW" %}
+            <span class="status-badge status-low" id="yield-status">⚠️ {{ t('result_status_low') }}</span>
+            {% else %}
+            <span class="status-badge status-error" id="yield-status">❌ {{ status }}</span>
+            {% endif %}
+        </div>
+
+        {% if positive or negative %}
+        <div class="cards-row">
+            {% if positive %}
+            <div class="info-card">
+                <h2>📈 {{ t('result_key_positive') }}</h2>
+                {% for tkey, value, raw in positive %}
+                <div class="factor-item">
+                    <span class="factor-name">{{ t(tkey) if tkey else raw }}</span>
+                    <span class="factor-value factor-positive">+{{ value }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if negative %}
+            <div class="info-card">
+                <h2>📉 {{ t('result_key_negative') }}</h2>
+                {% for tkey, value, raw in negative %}
+                <div class="factor-item">
+                    <span class="factor-name">{{ t(tkey) if tkey else raw }}</span>
+                    <span class="factor-value factor-negative">{{ value }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if suggestions %}
+        <div class="suggestions-card">
+            <h2>💡 {{ t('result_recommendations') }}</h2>
+            {% for sug in suggestions %}
+            <div class="suggestion-item">{{ t(sug) }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <a href="/predict" class="btn-again" id="predict-again-btn">🔄 {{ t('result_predict_again') }}</a>
+    </div>
+</body>
+</html>

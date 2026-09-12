@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Model files (regenerated during build from CSV dataset)
+model/*.pkl
+
+# Large data files (keep CSV for training, exclude xlsx)
+*.xlsx
+
+# Virtual environments
+venv/
+env/
+.env
+
+# Node
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# CatBoost training artifacts
+catboost_info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Installation scripts (Windows-only dev tools)
+install_dependencies.bat
+install_dependencies.ps1
+
+# Git LFS config (no longer used)
+.gitattributes
